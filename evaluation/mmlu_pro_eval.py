@@ -3,14 +3,14 @@ from datasets import load_dataset
 from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from accelerate import Accelerator
-import evaluate
+# import evaluate
 import sqlite3
 from datetime import datetime
 import json
 import re
 import random
 import argparse
-from config import ModelConfig, DEFAULT_CONFIG
+from config import ModelConfig, DEFAULT_CONFIG, PROMPT_TEMPLATES
 
 def evaluate_model(model, tokenizer, dataset, config: ModelConfig):
     model.eval()
@@ -23,10 +23,13 @@ def evaluate_model(model, tokenizer, dataset, config: ModelConfig):
         batch_prompts = []
         
         for example in batch:
-            prompt = f"Question: {example['question']}\nOptions:\n"
-            for idx, option in enumerate(example['options']):
-                prompt += f"{chr(65+idx)}) {option}\n"
-            prompt += f"\nAnswer: Let's solve this step by step."
+            options_text = "\n".join(f"{chr(65+idx)}) {option}" 
+                                   for idx, option in enumerate(example['options']))
+            prompt = config.prompt_template.format(
+                question=example['question'],
+                options=options_text,
+                subject=config.subject  # Add subject to the format arguments
+            )
             batch_prompts.append(prompt)
         
         inputs = tokenizer(
@@ -76,23 +79,54 @@ def evaluate_model(model, tokenizer, dataset, config: ModelConfig):
         'accuracy': accuracy
     }
 
+# def init_db():
+#     conn = sqlite3.connect('mmlu_eval_results.db')
+#     c = conn.cursor()
+    
+#     c.execute('''
+#         CREATE TABLE IF NOT EXISTS evaluations (
+#             id INTEGER PRIMARY KEY AUTOINCREMENT,
+#             model_name TEXT,
+#             subject TEXT,
+#             generation_params TEXT,  -- JSON object
+#             max_tokens INTEGER,
+#             torch_dtype TEXT,
+#             metrics TEXT,  -- JSON object
+#             timestamp TEXT,
+#             eval_index INTEGER
+#         )
+#     ''')
+#     conn.commit()
+#     return conn
+
 def init_db():
     conn = sqlite3.connect('mmlu_eval_results.db')
     c = conn.cursor()
     
+    # First create table if it doesn't exist
     c.execute('''
         CREATE TABLE IF NOT EXISTS evaluations (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             model_name TEXT,
             subject TEXT,
-            generation_params TEXT,  -- JSON object
+            generation_params TEXT,
             max_tokens INTEGER,
             torch_dtype TEXT,
-            metrics TEXT,  -- JSON object
+            metrics TEXT,
             timestamp TEXT,
             eval_index INTEGER
         )
     ''')
+    
+    # Check if columns exist and add them if they don't
+    cursor = c.execute('PRAGMA table_info(evaluations)')
+    columns = [row[1] for row in cursor.fetchall()]
+    
+    if 'prompt_id' not in columns:
+        c.execute('ALTER TABLE evaluations ADD COLUMN prompt_id TEXT')
+    if 'prompt_template' not in columns:
+        c.execute('ALTER TABLE evaluations ADD COLUMN prompt_template TEXT')
+    
     conn.commit()
     return conn
 
@@ -100,7 +134,6 @@ def store_results(conn, results, config: ModelConfig):
     c = conn.cursor()
     timestamp = datetime.now().isoformat()
     
-    # Get current max index for this model/subject combination
     c.execute('''
         SELECT MAX(eval_index)
         FROM evaluations 
@@ -110,14 +143,12 @@ def store_results(conn, results, config: ModelConfig):
     current_max = c.fetchone()[0]
     eval_index = 1 if current_max is None else current_max + 1
     
-    # Prepare generation parameters
     generation_params = {
         'temperature': config.temperature,
         'top_p': config.top_p,
         'do_sample': config.do_sample
     }
     
-    # Prepare metrics
     metrics = {
         'accuracy': results['accuracy']
     }
@@ -125,8 +156,8 @@ def store_results(conn, results, config: ModelConfig):
     c.execute('''
         INSERT INTO evaluations 
         (model_name, subject, generation_params, max_tokens, torch_dtype, 
-         metrics, timestamp, eval_index)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+         metrics, timestamp, eval_index, prompt_id, prompt_template)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ''', (
         config.model_name,
         config.subject,
@@ -135,7 +166,9 @@ def store_results(conn, results, config: ModelConfig):
         config.torch_dtype,
         json.dumps(metrics),
         timestamp,
-        eval_index
+        eval_index,
+        config.prompt_id,
+        config.prompt_template
     ))
     conn.commit()
 
@@ -149,7 +182,17 @@ def main():
     parser.add_argument('--model', type=str, help='Override model name')
     parser.add_argument('--batch-size', type=int, help='Override batch size')
     parser.add_argument('--list-subjects', action='store_true', help='List available subjects')
+    parser.add_argument('--prompt', type=str, choices=list(PROMPT_TEMPLATES.keys()), 
+                       help='Use a predefined prompt template')
+    parser.add_argument('--custom-prompt', type=str, 
+                       help='Custom prompt template with {question} and {options} placeholders')
+
     args = parser.parse_args()
+    seed = 42  # or add as an argument like --seed
+    random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
 
     if args.list_subjects:
         subjects = get_available_subjects()
@@ -157,6 +200,13 @@ def main():
         return
 
     config = DEFAULT_CONFIG
+
+    if args.prompt:
+        config.prompt_id = args.prompt
+    elif args.custom_prompt:
+        # Add the custom template to PROMPT_TEMPLATES
+        PROMPT_TEMPLATES['custom'] = args.custom_prompt
+        config.prompt_id = 'custom'
 
     if args.subject:
         config.subject = args.subject
@@ -170,6 +220,7 @@ def main():
     conn = init_db()
 
     print(f"Evaluating {config.model_name} on subject: {config.subject}")
+    print(f"Using prompt template: {config.prompt_id}")
     print("Config:", json.dumps(config.__dict__, indent=2))
 
     print("Loading tokenizer...")
