@@ -1,143 +1,70 @@
-# from accelerate import Accelerator
-# from transformers import AutoModelForCausalLM, AutoTokenizer
-# import torch
-# from lm_eval.models import huggingface
-# from lm_eval.tasks import get_task_dict
-# from lm_eval import evaluate
-# from lm_eval.utils import simple_parse_args_string
-# import argparse
-# import sqlite3
-# from datetime import datetime
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from accelerate import Accelerator
+from datasets import load_dataset
+from mmlu_pro.eval import MMPROEvaluator
+from mmlu_pro.config import ModelConfig, DEFAULT_CONFIG
 
-# def str2bool(v):
-#     if isinstance(v, bool):
-#         return v
-#     if v.lower() in ('yes', 'true', 't', 'y', '1'):
-#         return True
-#     elif v.lower() in ('no', 'false', 'f', 'n', '0'):
-#         return False
-#     else:
-#         raise argparse.ArgumentTypeError('Boolean value expected.')
+def main():
+    # Set random seeds
+    seed = 42
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+        torch.backends.cudnn.benchmark = True
 
-# def setup_database():
-#     conn = sqlite3.connect('model_evaluations.db')
-#     c = conn.cursor()
-#     c.execute('''
-#         CREATE TABLE IF NOT EXISTS evaluations (
-#             id INTEGER PRIMARY KEY AUTOINCREMENT,
-#             model_id TEXT,
-#             task_name TEXT,
-#             temperature REAL,
-#             do_sample BOOLEAN,
-#             top_p REAL,
-#             batch_size INTEGER,
-#             max_length INTEGER,
-#             device TEXT,
-#             score REAL,
-#             timestamp DATETIME,
-#             additional_metrics TEXT
-#         )
-#     ''')
-#     conn.commit()
-#     return conn
-
-# def run_evaluation(args):
-#     print("\nDebug - Input args:")
-#     print(f"temperature: {args.temperature}")
-#     print(f"do_sample: {args.do_sample}")
-#     print(f"top_p: {args.top_p}")
-
-#     accelerator = Accelerator()
-#     tokenizer = AutoTokenizer.from_pretrained(args.model_id)
-#     model = AutoModelForCausalLM.from_pretrained(
-#         args.model_id,
-#         device_map='auto',
-#         torch_dtype=torch.bfloat16,
-#         pad_token_id=tokenizer.pad_token_id,
-#     )
-
-#     # Create generation kwargs dictionary based on do_sample
-#     generation_kwargs = {
-#         "do_sample": args.do_sample,
-#         "max_length": args.max_length,
-#     }
+    # Initialize config (you can modify this as needed)
+    config = DEFAULT_CONFIG
     
-#     # Only add temperature and top_p if do_sample is True
-#     if args.do_sample:
-#         generation_kwargs.update({
-#             "temperature": args.temperature,
-#             "top_p": args.top_p,
-#         })
+    # Initialize accelerator
+    accelerator = Accelerator(
+        mixed_precision='bf16',
+        gradient_accumulation_steps=1,
+        split_batches=True
+    )
 
-#     print("\nDebug - Generation kwargs:", generation_kwargs)
+    # Initialize model and tokenizer
+    print("Loading tokenizer...")
+    tokenizer = AutoTokenizer.from_pretrained(config.model_name)
+    tokenizer.padding_side = "left"
+    
+    print("Loading model...")
+    model = AutoModelForCausalLM.from_pretrained(
+        config.model_name,
+        torch_dtype=getattr(torch, config.torch_dtype),
+        device_map=config.device_map
+    )
+    model.config.pad_token_id = model.config.bos_token_id
+    tokenizer.pad_token = tokenizer.bos_token
+    model.resize_token_embeddings(len(tokenizer))
 
-#     model_wrapper = huggingface.HFLM(
-#         pretrained=model,
-#         tokenizer=tokenizer,
-#         batch_size=args.batch_size,
-#         max_length=args.max_length,
-#         generation_kwargs=generation_kwargs
-#     )
+    # Prepare model with accelerator
+    model = accelerator.prepare(model)
 
-#     # Get task dict
-#     task_dict = get_task_dict([args.task_name])
+    # Initialize evaluator
+    evaluator = MMPROEvaluator(model, tokenizer, config, accelerator)
 
-#     results = evaluate(
-#         lm=model_wrapper,
-#         task_dict=task_dict
-#     )
+    # Load and filter dataset
+    dataset = load_dataset("TIGER-Lab/MMLU-Pro", split="test")
+    subject_data = dataset.filter(lambda x: x['category'] == config.subject)
+    
+    if len(subject_data) == 0:
+        available_subjects = evaluator.get_available_subjects()
+        print(f"Error: Subject '{config.subject}' not found.")
+        print("Available subjects:", available_subjects)
+        return
 
-#     return results, accelerator.device
+    print(f"Evaluating {config.model_name} on subject: {config.subject}")
+    print(f"Using prompt template: {config.prompt_id}")
+    print(f"Number of BOS tokens: {config.n_bos_tokens}")
+    print("-" * 50)
 
-# def save_results(conn, args, results, device):
-#     cursor = conn.cursor()
-#     cursor.execute('''
-#         INSERT INTO evaluations (
-#             model_id, task_name, temperature, do_sample, top_p,
-#             batch_size, max_length, device, score, timestamp, additional_metrics
-#         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-#     ''', (
-#         args.model_id,
-#         args.task_name,
-#         args.temperature,
-#         args.do_sample,
-#         args.top_p,
-#         args.batch_size,
-#         args.max_length,
-#         str(device),
-#         results['results'][f"{args.task_name}_acc"],
-#         datetime.now(),
-#         str(results)
-#     ))
-#     conn.commit()
+    # Run evaluation
+    results = evaluator.evaluate(subject_data)
+    print(f"Accuracy: {results['accuracy']:.4f}")
+    
+    # Clean up
+    evaluator.close()
 
-# def main():
-#     parser = argparse.ArgumentParser(description='Run model evaluation')
-#     parser.add_argument('--model_id', type=str, default="meta-llama/Llama-3.1-8B-Instruct",
-#                       help='Model identifier')
-#     parser.add_argument('--task_name', type=str, default="mmlu_pro_computer_science",
-#                       help='Task name for evaluation')
-#     # Changed bool type to str2bool for proper boolean parsing
-#     parser.add_argument('--do_sample', type=str2bool, default=True,
-#                       help='Whether to use sampling (true/false)')
-#     parser.add_argument('--temperature', type=float, default=0.7,
-#                       help='Sampling temperature (only used if do_sample=True)')
-#     parser.add_argument('--top_p', type=float, default=0.9,
-#                       help='Top-p sampling parameter (only used if do_sample=True)')
-#     parser.add_argument('--batch_size', type=int, default=8,
-#                       help='Batch size')
-#     parser.add_argument('--max_length', type=int, default=256,
-#                       help='Maximum sequence length')
-
-#     args = parser.parse_args()
-#     conn = setup_database()
-
-#     try:
-#         results, device = run_evaluation(args)
-#         save_results(conn, args, results, device)
-#         print(f"Evaluation completed and saved. Score: {results['results'][f'{args.task_name}_acc']}")
-#     finally:
-#         conn.close()
-
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
