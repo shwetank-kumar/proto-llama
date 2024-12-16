@@ -1,0 +1,5 @@
+## Experiments with different inference parameters
+## Experiments with quantized models
+## Experiments with different model types
+## Constrained token generation decide library and experiment
+## Better quantization through weight clustering and sharing
