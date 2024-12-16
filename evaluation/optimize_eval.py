@@ -37,7 +37,7 @@ class MMPROOptimizer:
         self.output_dir.mkdir(parents=True, exist_ok=True)
         
         # Setup logging
-        log_path = self.output_dir / "optimization.log"
+        log_path = self.output_dir / "mmlu_pro_optimization.log"
         logging.basicConfig(
             level=logging.INFO,
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',

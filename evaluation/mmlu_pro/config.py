@@ -42,8 +42,8 @@ class ModelConfig:
     subject: str = "computer science"
     batch_size: int = 16
     do_sample: bool = True
-    temperature: Optional[float] = 0.7
-    top_p: Optional[float] = 0.9 # 0.8, 0.7, 0.6, 0.5
+    temperature: Optional[float] = 0.8
+    top_p: Optional[float] = 0.2 
     torch_dtype: str = "bfloat16"
     device_map: str = "auto"
     prompt_id: str = "basic"

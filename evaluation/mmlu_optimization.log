@@ -419,3 +419,184 @@ Starting trial 0
 2024-12-15 20:21:22,567 - __main__ - INFO - Temperature: 0.4
 2024-12-15 20:21:22,568 - __main__ - INFO - Top_p: 0.9
 2024-12-15 20:21:22,599 - __main__ - INFO - Running evaluation
+2024-12-15 20:40:43,023 - __main__ - INFO - Creating new study: mmlu_opt_computer science_20241215_2040
+2024-12-15 20:40:43,023 - __main__ - INFO - Setting up random seeds
+2024-12-15 20:40:43,157 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-15 20:40:43,199 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-15 20:40:43,200 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-15 20:40:43,201 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-15 20:40:43,201 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-15 20:40:43,201 - __main__ - INFO - Initializing accelerator
+2024-12-15 20:40:43,240 - __main__ - INFO - Accelerator initialized successfully
+2024-12-15 20:40:43,240 - __main__ - INFO - Loading tokenizer
+2024-12-15 20:40:43,626 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-15 20:40:43,626 - __main__ - INFO - Loading model
+2024-12-15 20:41:07,195 - __main__ - INFO - Model loaded successfully
+2024-12-15 20:41:07,195 - __main__ - INFO - Configuring model tokens
+2024-12-15 20:41:07,206 - __main__ - INFO - Token configuration completed
+2024-12-15 20:41:07,206 - __main__ - INFO - Preparing model with accelerator
+2024-12-15 20:41:07,206 - __main__ - INFO - Model preparation completed
+2024-12-15 20:41:07,206 - __main__ - INFO - Loading dataset
+2024-12-15 20:41:09,300 - __main__ - INFO - Dataset loaded, filtering by subject
+2024-12-15 20:41:09,301 - __main__ - INFO - Starting dataset filtering
+2024-12-15 20:41:11,219 - __main__ - INFO - Processed batch, current size: 100
+2024-12-15 20:41:11,228 - __main__ - INFO - Processed batch, current size: 200
+2024-12-15 20:41:11,239 - __main__ - INFO - Processed batch, current size: 300
+2024-12-15 20:41:11,250 - __main__ - INFO - Processed batch, current size: 400
+2024-12-15 20:41:11,399 - __main__ - INFO - Dataset filtered, size: 410
+2024-12-15 20:41:11,399 - __main__ - INFO - Environment setup completed successfully
+2024-12-15 20:41:11,511 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-15 20:41:11,511 - __main__ - INFO - 
+Starting/Resuming optimization for subject: computer science
+2024-12-15 20:41:11,512 - __main__ - INFO - Found 0 completed trials
+2024-12-15 20:41:11,512 - __main__ - INFO - Found 0 failed trials
+2024-12-15 20:41:11,513 - __main__ - INFO - Last failed trial number: -1
+2024-12-15 20:41:11,513 - __main__ - INFO - Remaining trials to run: 20
+2024-12-15 20:41:11,513 - __main__ - INFO - Model: meta-llama/Llama-3.1-8B-Instruct
+2024-12-15 20:41:11,513 - __main__ - INFO - Study name: mmlu_opt_computer science_20241215_2040
+2024-12-15 20:41:11,513 - __main__ - INFO - --------------------------------------------------
+2024-12-15 20:41:11,530 - __main__ - INFO - 
+Starting trial 0
+2024-12-15 20:41:11,554 - __main__ - INFO - Trial 0 parameters:
+2024-12-15 20:41:11,555 - __main__ - INFO - Temperature: 0.4
+2024-12-15 20:41:11,555 - __main__ - INFO - Top_p: 0.9
+2024-12-15 20:41:11,585 - __main__ - INFO - Running evaluation
+2024-12-15 20:57:34,838 - __main__ - INFO - Trial 0 completed with accuracy: 0.4073
+2024-12-15 20:57:34,891 - __main__ - INFO - 
+Starting trial 1
+2024-12-15 20:57:34,914 - __main__ - INFO - Trial 1 parameters:
+2024-12-15 20:57:34,914 - __main__ - INFO - Temperature: 0.7
+2024-12-15 20:57:34,914 - __main__ - INFO - Top_p: 0.6
+2024-12-15 20:57:34,943 - __main__ - INFO - Running evaluation
+2024-12-15 21:14:36,854 - __main__ - INFO - Trial 1 completed with accuracy: 0.4195
+2024-12-15 21:14:36,899 - __main__ - INFO - 
+Starting trial 2
+2024-12-15 21:14:36,920 - __main__ - INFO - Trial 2 parameters:
+2024-12-15 21:14:36,920 - __main__ - INFO - Temperature: 0.2
+2024-12-15 21:14:36,921 - __main__ - INFO - Top_p: 0.2
+2024-12-15 21:14:36,955 - __main__ - INFO - Running evaluation
+2024-12-15 21:32:14,672 - __main__ - INFO - Trial 2 completed with accuracy: 0.4317
+2024-12-15 21:32:14,715 - __main__ - INFO - 
+Starting trial 3
+2024-12-15 21:32:14,735 - __main__ - INFO - Trial 3 parameters:
+2024-12-15 21:32:14,735 - __main__ - INFO - Temperature: 0.1
+2024-12-15 21:32:14,735 - __main__ - INFO - Top_p: 0.8
+2024-12-15 21:32:14,766 - __main__ - INFO - Running evaluation
+2024-12-15 21:50:02,772 - __main__ - INFO - Trial 3 completed with accuracy: 0.4073
+2024-12-15 21:50:02,816 - __main__ - INFO - 
+Starting trial 4
+2024-12-15 21:50:02,837 - __main__ - INFO - Trial 4 parameters:
+2024-12-15 21:50:02,837 - __main__ - INFO - Temperature: 0.6
+2024-12-15 21:50:02,837 - __main__ - INFO - Top_p: 0.7
+2024-12-15 21:50:02,868 - __main__ - INFO - Running evaluation
+2024-12-15 22:08:18,911 - __main__ - INFO - Trial 4 completed with accuracy: 0.4098
+2024-12-15 22:08:18,955 - __main__ - INFO - 
+Starting trial 5
+2024-12-15 22:08:18,976 - __main__ - INFO - Trial 5 parameters:
+2024-12-15 22:08:18,976 - __main__ - INFO - Temperature: 0.1
+2024-12-15 22:08:18,976 - __main__ - INFO - Top_p: 0.9
+2024-12-15 22:08:19,009 - __main__ - INFO - Running evaluation
+2024-12-15 22:26:39,453 - __main__ - INFO - Trial 5 completed with accuracy: 0.4195
+2024-12-15 22:26:39,497 - __main__ - INFO - 
+Starting trial 6
+2024-12-15 22:26:39,518 - __main__ - INFO - Trial 6 parameters:
+2024-12-15 22:26:39,518 - __main__ - INFO - Temperature: 0.8
+2024-12-15 22:26:39,518 - __main__ - INFO - Top_p: 0.2
+2024-12-15 22:26:39,548 - __main__ - INFO - Running evaluation
+2024-12-15 22:44:59,594 - __main__ - INFO - Trial 6 completed with accuracy: 0.4390
+2024-12-15 22:44:59,642 - __main__ - INFO - 
+Starting trial 7
+2024-12-15 22:44:59,665 - __main__ - INFO - Trial 7 parameters:
+2024-12-15 22:44:59,665 - __main__ - INFO - Temperature: 0.2
+2024-12-15 22:44:59,665 - __main__ - INFO - Top_p: 0.2
+2024-12-15 22:44:59,700 - __main__ - INFO - Running evaluation
+2024-12-15 23:03:28,299 - __main__ - INFO - Trial 7 completed with accuracy: 0.4317
+2024-12-15 23:03:28,343 - __main__ - INFO - 
+Starting trial 8
+2024-12-15 23:03:28,364 - __main__ - INFO - Trial 8 parameters:
+2024-12-15 23:03:28,365 - __main__ - INFO - Temperature: 0.3
+2024-12-15 23:03:28,365 - __main__ - INFO - Top_p: 0.5
+2024-12-15 23:03:28,395 - __main__ - INFO - Running evaluation
+2024-12-15 23:22:00,911 - __main__ - INFO - Trial 8 completed with accuracy: 0.4024
+2024-12-15 23:22:00,955 - __main__ - INFO - 
+Starting trial 9
+2024-12-15 23:22:00,977 - __main__ - INFO - Trial 9 parameters:
+2024-12-15 23:22:00,977 - __main__ - INFO - Temperature: 0.4
+2024-12-15 23:22:00,977 - __main__ - INFO - Top_p: 0.3
+2024-12-15 23:22:01,006 - __main__ - INFO - Running evaluation
+2024-12-15 23:40:34,587 - __main__ - INFO - Trial 9 completed with accuracy: 0.4244
+2024-12-15 23:40:34,631 - __main__ - INFO - 
+Starting trial 10
+2024-12-15 23:40:34,662 - __main__ - INFO - Trial 10 parameters:
+2024-12-15 23:40:34,663 - __main__ - INFO - Temperature: 0.9
+2024-12-15 23:40:34,663 - __main__ - INFO - Top_p: 0.4
+2024-12-15 23:40:34,693 - __main__ - INFO - Running evaluation
+2024-12-15 23:59:17,785 - __main__ - INFO - Trial 10 completed with accuracy: 0.4317
+2024-12-15 23:59:17,828 - __main__ - INFO - 
+Starting trial 11
+2024-12-15 23:59:17,851 - __main__ - INFO - Trial 11 parameters:
+2024-12-15 23:59:17,852 - __main__ - INFO - Temperature: 0.9
+2024-12-15 23:59:17,852 - __main__ - INFO - Top_p: 0.1
+2024-12-15 23:59:17,885 - __main__ - INFO - Running evaluation
+2024-12-16 00:18:01,355 - __main__ - INFO - Trial 11 completed with accuracy: 0.4317
+2024-12-16 00:18:01,399 - __main__ - INFO - 
+Starting trial 12
+2024-12-16 00:18:01,422 - __main__ - INFO - Trial 12 parameters:
+2024-12-16 00:18:01,422 - __main__ - INFO - Temperature: 0.7
+2024-12-16 00:18:01,422 - __main__ - INFO - Top_p: 0.1
+2024-12-16 00:18:01,452 - __main__ - INFO - Running evaluation
+2024-12-16 00:36:32,413 - __main__ - INFO - Trial 12 completed with accuracy: 0.4366
+2024-12-16 00:36:32,458 - __main__ - INFO - 
+Starting trial 13
+2024-12-16 00:36:32,481 - __main__ - INFO - Trial 13 parameters:
+2024-12-16 00:36:32,482 - __main__ - INFO - Temperature: 0.7
+2024-12-16 00:36:32,482 - __main__ - INFO - Top_p: 0.1
+2024-12-16 00:36:32,512 - __main__ - INFO - Running evaluation
+2024-12-16 00:55:05,701 - __main__ - INFO - Trial 13 completed with accuracy: 0.4341
+2024-12-16 00:55:05,745 - __main__ - INFO - 
+Starting trial 14
+2024-12-16 00:55:05,768 - __main__ - INFO - Trial 14 parameters:
+2024-12-16 00:55:05,768 - __main__ - INFO - Temperature: 0.8
+2024-12-16 00:55:05,768 - __main__ - INFO - Top_p: 0.3
+2024-12-16 00:55:05,799 - __main__ - INFO - Running evaluation
+2024-12-16 01:13:27,740 - __main__ - INFO - Trial 14 completed with accuracy: 0.4024
+2024-12-16 01:13:27,787 - __main__ - INFO - 
+Starting trial 15
+2024-12-16 01:13:27,809 - __main__ - INFO - Trial 15 parameters:
+2024-12-16 01:13:27,809 - __main__ - INFO - Temperature: 0.6
+2024-12-16 01:13:27,809 - __main__ - INFO - Top_p: 0.1
+2024-12-16 01:13:27,841 - __main__ - INFO - Running evaluation
+2024-12-16 01:32:10,788 - __main__ - INFO - Trial 15 completed with accuracy: 0.4317
+2024-12-16 01:32:10,832 - __main__ - INFO - 
+Starting trial 16
+2024-12-16 01:32:10,855 - __main__ - INFO - Trial 16 parameters:
+2024-12-16 01:32:10,855 - __main__ - INFO - Temperature: 0.8
+2024-12-16 01:32:10,855 - __main__ - INFO - Top_p: 0.3
+2024-12-16 01:32:10,886 - __main__ - INFO - Running evaluation
+2024-12-16 01:50:52,831 - __main__ - INFO - Trial 16 completed with accuracy: 0.4098
+2024-12-16 01:50:52,878 - __main__ - INFO - 
+Starting trial 17
+2024-12-16 01:50:52,904 - __main__ - INFO - Trial 17 parameters:
+2024-12-16 01:50:52,904 - __main__ - INFO - Temperature: 0.6
+2024-12-16 01:50:52,904 - __main__ - INFO - Top_p: 0.5
+2024-12-16 01:50:52,937 - __main__ - INFO - Running evaluation
+2024-12-16 02:09:21,650 - __main__ - INFO - Trial 17 completed with accuracy: 0.4244
+2024-12-16 02:09:21,700 - __main__ - INFO - 
+Starting trial 18
+2024-12-16 02:09:21,727 - __main__ - INFO - Trial 18 parameters:
+2024-12-16 02:09:21,727 - __main__ - INFO - Temperature: 0.8
+2024-12-16 02:09:21,727 - __main__ - INFO - Top_p: 0.2
+2024-12-16 02:09:21,762 - __main__ - INFO - Running evaluation
+2024-12-16 02:27:41,171 - __main__ - INFO - Trial 18 completed with accuracy: 0.4439
+2024-12-16 02:27:41,215 - __main__ - INFO - 
+Starting trial 19
+2024-12-16 02:27:41,239 - __main__ - INFO - Trial 19 parameters:
+2024-12-16 02:27:41,240 - __main__ - INFO - Temperature: 0.8
+2024-12-16 02:27:41,240 - __main__ - INFO - Top_p: 0.4
+2024-12-16 02:27:41,270 - __main__ - INFO - Running evaluation
+2024-12-16 02:45:57,207 - __main__ - INFO - Trial 19 completed with accuracy: 0.4024
+2024-12-16 02:45:57,247 - __main__ - INFO - Optimization completed successfully
+2024-12-16 02:45:57,247 - __main__ - INFO - Best parameters: {'temperature': 0.8, 'top_p': 0.2}
+2024-12-16 02:45:57,247 - __main__ - INFO - Best accuracy: 0.4439
+2024-12-16 02:45:57,247 - __main__ - INFO - Calculating study statistics
+2024-12-16 02:45:58,396 - __main__ - INFO - Statistics calculation completed

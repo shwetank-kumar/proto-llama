@@ -9,6 +9,7 @@ import random
 # from dataclasses import asdict
 from typing import Dict, List, Any, Optional
 from accelerate import Accelerator
+from pathlib import Path
 
 class MMPROEvaluator:
     def __init__(
@@ -16,7 +17,9 @@ class MMPROEvaluator:
         model,
         tokenizer,
         config,
-        accelerator: Optional[Accelerator] = None
+        accelerator: Optional[Accelerator] = None,
+        output_dir: str = "mmlu_pro",
+        db_name: str = "mmlu_eval_results.db"
     ):
         """
         Initialize the MMLU-Pro evaluator with a pre-initialized model and tokenizer.
@@ -43,12 +46,18 @@ class MMPROEvaluator:
             re.compile(r'.*\b([A-J])\b.*', re.IGNORECASE)
         ]
         
+        # Create output directory if it doesn't exist
+        self.output_dir = Path(output_dir)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        self.db_path = self.output_dir / db_name
+        # self.storage_url = f"sqlite:///{self.db_path}"
+        
         # Initialize database connection
         self.db_conn = self._init_db()
 
     def _init_db(self) -> sqlite3.Connection:
         """Initialize SQLite database for storing evaluation results."""
-        conn = sqlite3.connect('mmlu_eval_results.db')
+        conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
         
         c.execute('''
