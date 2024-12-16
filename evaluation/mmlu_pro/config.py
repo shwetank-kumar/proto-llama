@@ -40,7 +40,7 @@ Options:
 class ModelConfig:
     model_name: str = "meta-llama/Llama-3.1-8B-Instruct"
     subject: str = "computer science"
-    batch_size: int = 32
+    batch_size: int = 16
     do_sample: bool = True
     temperature: Optional[float] = 0.7
     top_p: Optional[float] = 0.9 # 0.8, 0.7, 0.6, 0.5
@@ -48,7 +48,7 @@ class ModelConfig:
     device_map: str = "auto"
     prompt_id: str = "basic"
     n_bos_tokens: int = 256
-    max_new_tokens: int = 32
+    max_new_tokens: int = 512
     verbose: bool = False
     
     @property
