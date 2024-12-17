@@ -53,7 +53,7 @@ class MMPROOptimizer:
         self.storage_url = f"sqlite:///{self.db_path}"
         
         self.base_config = base_config
-        self.base_config.max_new_tokens = 512
+        self.base_config.max_new_tokens = 1024
         self.n_trials = n_trials
         
         # Use provided study name or create new one
