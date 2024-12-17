@@ -152,8 +152,8 @@ class MMPROOptimizer:
                 batch_size = 100  # Process 100 examples at a time
                 
                 logger.info("Starting dataset filtering")
-                for example in dataset:
-                    if example['category'] == self.base_config.subject:
+                for example in dataset:    
+                    if self.base_config.subject is None or example['category'] == self.base_config.subject:
                         current_batch.append(example)
                         
                     if len(current_batch) >= batch_size:

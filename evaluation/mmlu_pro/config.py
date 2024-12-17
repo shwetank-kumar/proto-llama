@@ -39,11 +39,11 @@ Options:
 @dataclass
 class ModelConfig:
     model_name: str = "meta-llama/Llama-3.1-8B-Instruct"
-    subject: str = "computer science"
-    batch_size: int = 16
+    subject: Optional[str] = None
+    batch_size: int = 32
     do_sample: bool = True
-    temperature: Optional[float] = 0.8
-    top_p: Optional[float] = 0.2 
+    temperature: Optional[float] = 0.3
+    top_p: Optional[float] = 0.3
     torch_dtype: str = "bfloat16"
     device_map: str = "auto"
     prompt_id: str = "basic"

@@ -46,7 +46,10 @@ def main():
 
     # Load and filter dataset
     dataset = load_dataset("TIGER-Lab/MMLU-Pro", split="test")
-    subject_data = dataset.filter(lambda x: x['category'] == config.subject)
+    if config.subject is not None:
+        subject_data = dataset.filter(lambda x: x['category'] == config.subject)
+    else:
+        subject_data = dataset
     
     if len(subject_data) == 0:
         available_subjects = evaluator.get_available_subjects()
