@@ -1,0 +1,1224 @@
+2024-12-18 16:50:55,938 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241218_1650
+2024-12-18 16:50:55,938 - __main__ - INFO - Setting up random seeds
+2024-12-18 16:50:56,007 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-18 16:50:56,053 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-18 16:50:56,054 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-18 16:50:56,054 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-18 16:50:56,054 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-18 16:50:56,054 - __main__ - INFO - Initializing accelerator
+2024-12-18 16:50:56,091 - __main__ - INFO - Accelerator initialized successfully
+2024-12-18 16:50:56,091 - __main__ - INFO - Loading tokenizer
+2024-12-18 16:50:56,468 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-18 16:50:56,468 - __main__ - INFO - Loading dataset
+2024-12-18 16:50:59,435 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-18 16:50:59,435 - __main__ - INFO - Environment setup completed successfully
+2024-12-18 16:50:59,572 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-18 16:50:59,572 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-18 16:50:59,573 - __main__ - INFO - Evaluation type: constrained
+2024-12-18 16:50:59,593 - __main__ - INFO - 
+Starting trial 0
+2024-12-18 16:50:59,619 - __main__ - INFO - Trial 0 parameters:
+2024-12-18 16:50:59,620 - __main__ - INFO - Temperature: 0.4
+2024-12-18 16:50:59,620 - __main__ - INFO - Top_p: 0.9
+2024-12-18 16:51:45,822 - __main__ - INFO - Running evaluation
+2024-12-18 16:51:49,845 - __main__ - ERROR - Error in trial 0: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 15 (char 14) [type=value_error.jsondecode, input_value='{"reasoning": "The metho...urn the last occurrence', input_type=str]
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 15 (char 14)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 214, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 173, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 15 (char 14) [type=value_error.jsondecode, input_value='{"reasoning": "The metho...urn the last occurrence', input_type=str]
+2024-12-18 16:51:49,903 - __main__ - ERROR - Error during optimization
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 15 (char 14)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 243, in optimize
+    self.study.optimize(self.objective, n_trials=remaining_trials)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 214, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 173, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 15 (char 14) [type=value_error.jsondecode, input_value='{"reasoning": "The metho...urn the last occurrence', input_type=str]
+2024-12-18 16:51:49,910 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 15 (char 14)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 332, in main
+    results = optimizer.optimize()
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 243, in optimize
+    self.study.optimize(self.objective, n_trials=remaining_trials)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 214, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 173, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 15 (char 14) [type=value_error.jsondecode, input_value='{"reasoning": "The metho...urn the last occurrence', input_type=str]
+2024-12-18 16:53:40,771 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241218_1653
+2024-12-18 16:53:40,771 - __main__ - INFO - Setting up random seeds
+2024-12-18 16:53:40,864 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-18 16:53:40,909 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-18 16:53:40,909 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-18 16:53:40,910 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-18 16:53:40,910 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-18 16:53:40,910 - __main__ - INFO - Initializing accelerator
+2024-12-18 16:53:40,950 - __main__ - INFO - Accelerator initialized successfully
+2024-12-18 16:53:40,950 - __main__ - INFO - Loading tokenizer
+2024-12-18 16:53:41,324 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-18 16:53:41,325 - __main__ - INFO - Loading dataset
+2024-12-18 16:53:44,220 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-18 16:53:44,220 - __main__ - INFO - Environment setup completed successfully
+2024-12-18 16:53:44,355 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-18 16:53:44,355 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-18 16:53:44,355 - __main__ - INFO - Evaluation type: constrained
+2024-12-18 16:53:44,375 - __main__ - INFO - 
+Starting trial 0
+2024-12-18 16:53:44,401 - __main__ - INFO - Trial 0 parameters:
+2024-12-18 16:53:44,401 - __main__ - INFO - Temperature: 0.4
+2024-12-18 16:53:44,401 - __main__ - INFO - Top_p: 0.9
+2024-12-18 16:54:08,457 - __main__ - INFO - Running evaluation
+2024-12-18 16:54:12,193 - __main__ - ERROR - Error in trial 0: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 44 (char 43) [type=value_error.jsondecode, input_value='{"reasoning": "The method is to","choice": "', input_type=str]
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 44 (char 43)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 214, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 173, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 44 (char 43) [type=value_error.jsondecode, input_value='{"reasoning": "The method is to","choice": "', input_type=str]
+2024-12-18 16:54:12,229 - __main__ - ERROR - Error during optimization
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 44 (char 43)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 243, in optimize
+    self.study.optimize(self.objective, n_trials=remaining_trials)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 214, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 173, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 44 (char 43) [type=value_error.jsondecode, input_value='{"reasoning": "The method is to","choice": "', input_type=str]
+2024-12-18 16:54:12,237 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 44 (char 43)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 332, in main
+    results = optimizer.optimize()
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 243, in optimize
+    self.study.optimize(self.objective, n_trials=remaining_trials)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 214, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 173, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 44 (char 43) [type=value_error.jsondecode, input_value='{"reasoning": "The method is to","choice": "', input_type=str]
+2024-12-18 16:57:09,522 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241218_1657
+2024-12-18 16:57:09,522 - __main__ - INFO - Setting up random seeds
+2024-12-18 16:57:09,608 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-18 16:57:09,650 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-18 16:57:09,650 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-18 16:57:09,651 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-18 16:57:09,651 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-18 16:57:09,651 - __main__ - INFO - Initializing accelerator
+2024-12-18 16:57:09,687 - __main__ - INFO - Accelerator initialized successfully
+2024-12-18 16:57:09,687 - __main__ - INFO - Loading tokenizer
+2024-12-18 16:57:10,064 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-18 16:57:10,064 - __main__ - INFO - Loading dataset
+2024-12-18 16:57:15,312 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-18 16:57:15,312 - __main__ - INFO - Environment setup completed successfully
+2024-12-18 16:57:15,452 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-18 16:57:15,452 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-18 16:57:15,452 - __main__ - INFO - Evaluation type: constrained
+2024-12-18 16:57:15,472 - __main__ - INFO - 
+Starting trial 0
+2024-12-18 16:57:15,498 - __main__ - INFO - Trial 0 parameters:
+2024-12-18 16:57:15,499 - __main__ - INFO - Temperature: 0.4
+2024-12-18 16:57:15,499 - __main__ - INFO - Top_p: 0.9
+2024-12-18 16:57:37,430 - __main__ - INFO - Running evaluation
+2024-12-18 16:57:41,371 - __main__ - ERROR - Error in trial 0: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 44 (char 43) [type=value_error.jsondecode, input_value='{"reasoning": "The method is to","choice": "', input_type=str]
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 44 (char 43)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 216, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 173, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 44 (char 43) [type=value_error.jsondecode, input_value='{"reasoning": "The method is to","choice": "', input_type=str]
+2024-12-18 16:57:41,407 - __main__ - ERROR - Error during optimization
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 44 (char 43)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 245, in optimize
+    self.study.optimize(self.objective, n_trials=remaining_trials)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 216, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 173, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 44 (char 43) [type=value_error.jsondecode, input_value='{"reasoning": "The method is to","choice": "', input_type=str]
+2024-12-18 16:57:41,414 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 44 (char 43)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 334, in main
+    results = optimizer.optimize()
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 245, in optimize
+    self.study.optimize(self.objective, n_trials=remaining_trials)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 216, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 173, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 44 (char 43) [type=value_error.jsondecode, input_value='{"reasoning": "The method is to","choice": "', input_type=str]
+2024-12-18 16:59:36,857 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241218_1659
+2024-12-18 16:59:36,858 - __main__ - INFO - Setting up random seeds
+2024-12-18 16:59:36,928 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-18 16:59:36,971 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-18 16:59:36,971 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-18 16:59:36,971 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-18 16:59:36,971 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-18 16:59:36,971 - __main__ - INFO - Initializing accelerator
+2024-12-18 16:59:37,005 - __main__ - INFO - Accelerator initialized successfully
+2024-12-18 16:59:37,005 - __main__ - INFO - Loading tokenizer
+2024-12-18 16:59:37,356 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-18 16:59:37,357 - __main__ - INFO - Loading dataset
+2024-12-18 16:59:40,270 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-18 16:59:40,270 - __main__ - INFO - Environment setup completed successfully
+2024-12-18 16:59:40,393 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-18 16:59:40,393 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-18 16:59:40,393 - __main__ - INFO - Evaluation type: constrained
+2024-12-18 16:59:40,410 - __main__ - INFO - 
+Starting trial 0
+2024-12-18 16:59:40,436 - __main__ - INFO - Trial 0 parameters:
+2024-12-18 16:59:40,436 - __main__ - INFO - Temperature: 0.4
+2024-12-18 16:59:40,436 - __main__ - INFO - Top_p: 0.9
+2024-12-18 17:00:26,617 - __main__ - INFO - Running evaluation
+2024-12-18 17:29:08,782 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241218_1729
+2024-12-18 17:29:08,783 - __main__ - INFO - Setting up random seeds
+2024-12-18 17:29:08,867 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-18 17:29:08,925 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-18 17:29:08,925 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-18 17:29:08,925 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-18 17:29:08,925 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-18 17:29:08,925 - __main__ - INFO - Initializing accelerator
+2024-12-18 17:29:08,970 - __main__ - INFO - Accelerator initialized successfully
+2024-12-18 17:29:08,970 - __main__ - INFO - Loading tokenizer
+2024-12-18 17:29:09,360 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-18 17:29:09,360 - __main__ - INFO - Loading dataset
+2024-12-18 17:29:13,297 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-18 17:29:13,297 - __main__ - INFO - Environment setup completed successfully
+2024-12-18 17:29:13,436 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-18 17:29:13,436 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-18 17:29:13,436 - __main__ - INFO - Evaluation type: constrained
+2024-12-18 17:29:13,458 - __main__ - INFO - 
+Starting trial 0
+2024-12-18 17:29:13,487 - __main__ - INFO - Trial 0 parameters:
+2024-12-18 17:29:13,487 - __main__ - INFO - Temperature: 0.4
+2024-12-18 17:29:13,487 - __main__ - INFO - Top_p: 0.9
+2024-12-18 17:30:07,314 - __main__ - INFO - Running evaluation
+2024-12-18 17:33:28,610 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241218_1733
+2024-12-18 17:33:28,610 - __main__ - INFO - Setting up random seeds
+2024-12-18 17:33:28,705 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-18 17:33:28,763 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-18 17:33:28,763 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-18 17:33:28,763 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-18 17:33:28,763 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-18 17:33:28,763 - __main__ - INFO - Initializing accelerator
+2024-12-18 17:33:28,818 - __main__ - INFO - Accelerator initialized successfully
+2024-12-18 17:33:28,818 - __main__ - INFO - Loading tokenizer
+2024-12-18 17:33:29,259 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-18 17:33:29,259 - __main__ - INFO - Loading dataset
+2024-12-18 17:33:33,594 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-18 17:33:33,594 - __main__ - INFO - Environment setup completed successfully
+2024-12-18 17:33:33,730 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-18 17:33:33,730 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-18 17:33:33,730 - __main__ - INFO - Evaluation type: constrained
+2024-12-18 17:33:33,749 - __main__ - INFO - 
+Starting trial 0
+2024-12-18 17:33:33,777 - __main__ - INFO - Trial 0 parameters:
+2024-12-18 17:33:33,777 - __main__ - INFO - Temperature: 0.4
+2024-12-18 17:33:33,777 - __main__ - INFO - Top_p: 0.9
+2024-12-18 17:34:29,300 - __main__ - INFO - Running evaluation
+2024-12-18 17:52:39,666 - __main__ - INFO - Trial 0 completed with accuracy: 0.3610
+2024-12-18 17:52:39,719 - __main__ - INFO - 
+Starting trial 1
+2024-12-18 17:52:39,741 - __main__ - INFO - Trial 1 parameters:
+2024-12-18 17:52:39,741 - __main__ - INFO - Temperature: 0.7
+2024-12-18 17:52:39,741 - __main__ - INFO - Top_p: 0.6
+2024-12-18 17:53:23,991 - __main__ - INFO - Running evaluation
+2024-12-18 18:05:53,319 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241218_1805
+2024-12-18 18:05:53,319 - __main__ - INFO - Setting up random seeds
+2024-12-18 18:05:53,379 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-18 18:05:53,421 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-18 18:05:53,421 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-18 18:05:53,421 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-18 18:05:53,421 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-18 18:05:53,421 - __main__ - INFO - Initializing accelerator
+2024-12-18 18:05:53,451 - __main__ - INFO - Accelerator initialized successfully
+2024-12-18 18:05:53,452 - __main__ - INFO - Loading tokenizer
+2024-12-18 18:05:53,905 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-18 18:05:53,906 - __main__ - INFO - Loading dataset
+2024-12-18 18:05:57,436 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-18 18:05:57,436 - __main__ - INFO - Environment setup completed successfully
+2024-12-18 18:05:57,593 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-18 18:05:57,593 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-18 18:05:57,593 - __main__ - INFO - Evaluation type: constrained
+2024-12-18 18:05:57,616 - __main__ - INFO - 
+Starting trial 0
+2024-12-18 18:05:57,641 - __main__ - INFO - Trial 0 parameters:
+2024-12-18 18:05:57,642 - __main__ - INFO - Temperature: 0.4
+2024-12-18 18:05:57,642 - __main__ - INFO - Top_p: 0.9
+2024-12-18 18:06:40,247 - __main__ - INFO - Running evaluation
+2024-12-18 18:24:49,375 - __main__ - INFO - Trial 0 completed with accuracy: 0.3610
+2024-12-18 18:24:49,433 - __main__ - INFO - 
+Starting trial 1
+2024-12-18 18:24:49,454 - __main__ - INFO - Trial 1 parameters:
+2024-12-18 18:24:49,455 - __main__ - INFO - Temperature: 0.7
+2024-12-18 18:24:49,455 - __main__ - INFO - Top_p: 0.6
+2024-12-18 18:25:17,260 - __main__ - INFO - Running evaluation
+2024-12-18 18:41:39,613 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241218_1841
+2024-12-18 18:41:39,613 - __main__ - INFO - Setting up random seeds
+2024-12-18 18:41:39,705 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-18 18:41:39,756 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-18 18:41:39,756 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-18 18:41:39,757 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-18 18:41:39,757 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-18 18:41:39,757 - __main__ - INFO - Initializing accelerator
+2024-12-18 18:41:39,801 - __main__ - INFO - Accelerator initialized successfully
+2024-12-18 18:41:39,801 - __main__ - INFO - Loading tokenizer
+2024-12-18 18:41:40,195 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-18 18:41:40,195 - __main__ - INFO - Loading dataset
+2024-12-18 18:41:43,800 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-18 18:41:43,800 - __main__ - INFO - Environment setup completed successfully
+2024-12-18 18:41:43,908 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-18 18:41:43,908 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-18 18:41:43,908 - __main__ - INFO - Evaluation type: constrained
+2024-12-18 18:41:43,926 - __main__ - INFO - 
+Starting trial 0
+2024-12-18 18:41:43,951 - __main__ - INFO - Trial 0 parameters:
+2024-12-18 18:41:43,951 - __main__ - INFO - Temperature: 0.4
+2024-12-18 18:41:43,951 - __main__ - INFO - Top_p: 0.9
+2024-12-18 18:42:36,427 - __main__ - INFO - Running evaluation
+2024-12-18 19:43:14,211 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241218_1943
+2024-12-18 19:43:14,211 - __main__ - INFO - Setting up random seeds
+2024-12-18 19:43:14,287 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-18 19:43:14,330 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-18 19:43:14,331 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-18 19:43:14,331 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-18 19:43:14,331 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-18 19:43:14,331 - __main__ - INFO - Initializing accelerator
+2024-12-18 19:43:14,371 - __main__ - INFO - Accelerator initialized successfully
+2024-12-18 19:43:14,371 - __main__ - INFO - Loading tokenizer
+2024-12-18 19:43:14,777 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-18 19:43:14,777 - __main__ - INFO - Loading dataset
+2024-12-18 19:43:18,690 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-18 19:43:18,690 - __main__ - INFO - Environment setup completed successfully
+2024-12-18 19:43:18,832 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-18 19:43:18,832 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-18 19:43:18,832 - __main__ - INFO - Evaluation type: constrained
+2024-12-18 19:43:18,853 - __main__ - INFO - 
+Starting trial 0
+2024-12-18 19:43:18,881 - __main__ - INFO - Trial 0 parameters:
+2024-12-18 19:43:18,881 - __main__ - INFO - Temperature: 0.4
+2024-12-18 19:43:18,882 - __main__ - INFO - Top_p: 0.9
+2024-12-18 19:44:12,816 - __main__ - INFO - Running evaluation
+2024-12-18 20:05:01,410 - __main__ - INFO - Trial 0 completed with accuracy: 0.3756
+2024-12-18 20:05:01,460 - __main__ - INFO - 
+Starting trial 1
+2024-12-18 20:05:01,482 - __main__ - INFO - Trial 1 parameters:
+2024-12-18 20:05:01,483 - __main__ - INFO - Temperature: 0.7
+2024-12-18 20:05:01,483 - __main__ - INFO - Top_p: 0.6
+2024-12-18 20:05:28,026 - __main__ - INFO - Running evaluation
+2024-12-19 10:23:51,748 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241219_1023
+2024-12-19 10:23:51,748 - __main__ - INFO - Setting up random seeds
+2024-12-19 10:23:51,839 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-19 10:23:51,913 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-19 10:23:51,914 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-19 10:23:51,914 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-19 10:23:51,914 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-19 10:23:51,914 - __main__ - INFO - Initializing accelerator
+2024-12-19 10:23:51,960 - __main__ - INFO - Accelerator initialized successfully
+2024-12-19 10:23:51,960 - __main__ - INFO - Loading tokenizer
+2024-12-19 10:23:52,372 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-19 10:23:52,372 - __main__ - INFO - Loading dataset
+2024-12-19 10:23:56,523 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-19 10:23:56,523 - __main__ - INFO - Environment setup completed successfully
+2024-12-19 10:23:56,668 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-19 10:23:56,668 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-19 10:23:56,669 - __main__ - INFO - Evaluation type: constrained
+2024-12-19 10:23:56,688 - __main__ - INFO - 
+Starting trial 0
+2024-12-19 10:23:56,717 - __main__ - INFO - Trial 0 parameters:
+2024-12-19 10:23:56,717 - __main__ - INFO - Temperature: 0.4
+2024-12-19 10:23:56,717 - __main__ - INFO - Top_p: 0.9
+2024-12-19 10:24:48,361 - __main__ - INFO - Running evaluation
+2024-12-19 10:45:41,598 - __main__ - INFO - Trial 0 completed with accuracy: 0.3756
+2024-12-19 10:45:41,650 - __main__ - INFO - 
+Starting trial 1
+2024-12-19 10:45:41,673 - __main__ - INFO - Trial 1 parameters:
+2024-12-19 10:45:41,674 - __main__ - INFO - Temperature: 0.7
+2024-12-19 10:45:41,674 - __main__ - INFO - Top_p: 0.6
+2024-12-19 10:46:08,004 - __main__ - INFO - Running evaluation
+2024-12-19 10:53:54,815 - __main__ - ERROR - Error in trial 1: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 17 (char 16) [type=value_error.jsondecode, input_value='{ "reasoning" : "1 2 1 2...1 2 1 2 1 2 1 2 1 2 1 2', input_type=str]
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 17 (char 16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 213, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 173, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 17 (char 16) [type=value_error.jsondecode, input_value='{ "reasoning" : "1 2 1 2...1 2 1 2 1 2 1 2 1 2 1 2', input_type=str]
+2024-12-19 10:53:54,887 - __main__ - ERROR - Error during optimization
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 17 (char 16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 249, in optimize
+    self.study.optimize(self.objective, n_trials=remaining_trials)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 213, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 173, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 17 (char 16) [type=value_error.jsondecode, input_value='{ "reasoning" : "1 2 1 2...1 2 1 2 1 2 1 2 1 2 1 2', input_type=str]
+2024-12-19 10:53:54,899 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 17 (char 16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 342, in main
+    results = optimizer.optimize()
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 249, in optimize
+    self.study.optimize(self.objective, n_trials=remaining_trials)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 213, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 173, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 17 (char 16) [type=value_error.jsondecode, input_value='{ "reasoning" : "1 2 1 2...1 2 1 2 1 2 1 2 1 2 1 2', input_type=str]
+2024-12-19 11:14:50,091 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241219_1114
+2024-12-19 11:14:50,092 - __main__ - INFO - Setting up random seeds
+2024-12-19 11:14:50,168 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-19 11:14:50,214 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-19 11:14:50,214 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-19 11:14:50,215 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-19 11:14:50,215 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-19 11:14:50,215 - __main__ - INFO - Initializing accelerator
+2024-12-19 11:14:50,254 - __main__ - INFO - Accelerator initialized successfully
+2024-12-19 11:14:50,254 - __main__ - INFO - Loading tokenizer
+2024-12-19 11:14:50,707 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-19 11:14:50,707 - __main__ - INFO - Loading dataset
+2024-12-19 11:14:53,852 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-19 11:14:53,852 - __main__ - INFO - Environment setup completed successfully
+2024-12-19 11:14:53,995 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-19 11:14:53,995 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-19 11:14:53,995 - __main__ - INFO - Evaluation type: constrained
+2024-12-19 11:14:54,016 - __main__ - INFO - 
+Starting trial 0
+2024-12-19 11:14:54,046 - __main__ - INFO - Trial 0 parameters:
+2024-12-19 11:14:54,046 - __main__ - INFO - Temperature: 0.4
+2024-12-19 11:14:54,046 - __main__ - INFO - Top_p: 0.9
+2024-12-19 11:15:22,071 - __main__ - INFO - Running evaluation
+2024-12-19 11:20:59,100 - __main__ - INFO - Trial 0 completed with accuracy: 0.3195
+2024-12-19 11:20:59,154 - __main__ - INFO - 
+Starting trial 1
+2024-12-19 11:20:59,179 - __main__ - INFO - Trial 1 parameters:
+2024-12-19 11:20:59,179 - __main__ - INFO - Temperature: 0.7
+2024-12-19 11:20:59,179 - __main__ - INFO - Top_p: 0.6
+2024-12-19 11:21:09,243 - __main__ - INFO - Running evaluation
+2024-12-19 11:26:15,844 - __main__ - ERROR - Error in trial 1: name 'logging' is not defined
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 16 (char 15)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 177, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 16 (char 15) [type=value_error.jsondecode, input_value='{ "reasoning" :"} \\\\\\...\\\\\\\\\\\\\\\\\\\\\\\', input_type=str]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 213, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 200, in evaluate
+    logging.error(f"Error processing batch starting at index {i}: {str(e)}")
+NameError: name 'logging' is not defined
+2024-12-19 11:26:15,885 - __main__ - ERROR - Error during optimization
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 16 (char 15)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 177, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 16 (char 15) [type=value_error.jsondecode, input_value='{ "reasoning" :"} \\\\\\...\\\\\\\\\\\\\\\\\\\\\\\', input_type=str]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 244, in optimize
+    self.study.optimize(self.objective, n_trials=remaining_trials)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 213, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 200, in evaluate
+    logging.error(f"Error processing batch starting at index {i}: {str(e)}")
+NameError: name 'logging' is not defined
+2024-12-19 11:26:15,893 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1187, in parse_raw
+    obj = parse.load_str_bytes(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/deprecated/parse.py", line 49, in load_str_bytes
+    return json_loads(b)  # type: ignore
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 16 (char 15)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 177, in evaluate
+    answers = self.generator(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 512, in __call__
+    return self._format(completions)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in _format
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 486, in <listcomp>
+    return [self._format(sequence) for sequence in sequences]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/api.py", line 488, in _format
+    return self.format_sequence(sequences)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/generate/json.py", line 52, in <lambda>
+    generator.format_sequence = lambda x: schema_object.parse_raw(x)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/pydantic/main.py", line 1214, in parse_raw
+    raise pydantic_core.ValidationError.from_exception_data(cls.__name__, [error])
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 16 (char 15) [type=value_error.jsondecode, input_value='{ "reasoning" :"} \\\\\\...\\\\\\\\\\\\\\\\\\\\\\\', input_type=str]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 337, in main
+    results = optimizer.optimize()
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 244, in optimize
+    self.study.optimize(self.objective, n_trials=remaining_trials)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 213, in objective
+    results = evaluator.evaluate(self.subject_data)
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 200, in evaluate
+    logging.error(f"Error processing batch starting at index {i}: {str(e)}")
+NameError: name 'logging' is not defined
+2024-12-19 11:41:25,004 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241219_1141
+2024-12-19 11:41:25,005 - __main__ - INFO - Setting up random seeds
+2024-12-19 11:41:25,081 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-19 11:41:25,127 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-19 11:41:25,128 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-19 11:41:25,128 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-19 11:41:25,128 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-19 11:41:25,128 - __main__ - INFO - Initializing accelerator
+2024-12-19 11:41:25,171 - __main__ - INFO - Accelerator initialized successfully
+2024-12-19 11:41:25,172 - __main__ - INFO - Loading tokenizer
+2024-12-19 11:41:25,579 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-19 11:41:25,579 - __main__ - INFO - Loading dataset
+2024-12-19 11:41:31,928 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-19 11:41:31,928 - __main__ - INFO - Environment setup completed successfully
+2024-12-19 11:41:32,069 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-19 11:41:32,070 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-19 11:41:32,070 - __main__ - INFO - Evaluation type: constrained
+2024-12-19 11:41:32,090 - __main__ - INFO - 
+Starting trial 0
+2024-12-19 11:41:32,118 - __main__ - INFO - Trial 0 parameters:
+2024-12-19 11:41:32,119 - __main__ - INFO - Temperature: 0.4
+2024-12-19 11:41:32,119 - __main__ - INFO - Top_p: 0.9
+2024-12-19 11:42:01,081 - __main__ - INFO - Running evaluation
+2024-12-19 11:47:35,892 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-19 11:47:35,917 - __main__ - INFO - Trial 0 completed with accuracy: 0.3195
+2024-12-19 11:47:35,969 - __main__ - INFO - 
+Starting trial 1
+2024-12-19 11:47:35,993 - __main__ - INFO - Trial 1 parameters:
+2024-12-19 11:47:35,994 - __main__ - INFO - Temperature: 0.7
+2024-12-19 11:47:35,994 - __main__ - INFO - Top_p: 0.6
+2024-12-19 11:47:44,964 - __main__ - INFO - Running evaluation
+2024-12-19 11:52:48,301 - root - ERROR - Error processing batch starting at index 336: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 16 (char 15) [type=value_error.jsondecode, input_value='{ "reasoning" :"} \\\\\\...\\\\\\\\\\\\\\\\\\\\\\\', input_type=str]
+2024-12-19 11:53:29,841 - root - INFO - Evaluation completed. Processed 394/410 examples
+2024-12-19 11:53:29,841 - root - INFO - Skipped 16 examples at indices: [336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351]
+2024-12-19 11:53:29,866 - __main__ - INFO - Trial 1 completed with accuracy: 0.3325
+2024-12-19 11:53:29,917 - __main__ - INFO - 
+Starting trial 2
+2024-12-19 11:53:29,943 - __main__ - INFO - Trial 2 parameters:
+2024-12-19 11:53:29,943 - __main__ - INFO - Temperature: 0.2
+2024-12-19 11:53:29,943 - __main__ - INFO - Top_p: 0.2
+2024-12-19 11:53:38,697 - __main__ - INFO - Running evaluation
+2024-12-19 11:59:17,134 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-19 11:59:17,161 - __main__ - INFO - Trial 2 completed with accuracy: 0.3317
+2024-12-19 11:59:17,212 - __main__ - INFO - 
+Starting trial 3
+2024-12-19 11:59:17,238 - __main__ - INFO - Trial 3 parameters:
+2024-12-19 11:59:17,238 - __main__ - INFO - Temperature: 0.1
+2024-12-19 11:59:17,238 - __main__ - INFO - Top_p: 0.8
+2024-12-19 11:59:26,546 - __main__ - INFO - Running evaluation
+2024-12-19 12:05:03,571 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-19 12:05:03,597 - __main__ - INFO - Trial 3 completed with accuracy: 0.3220
+2024-12-19 12:05:03,643 - __main__ - INFO - 
+Starting trial 4
+2024-12-19 12:05:03,664 - __main__ - INFO - Trial 4 parameters:
+2024-12-19 12:05:03,664 - __main__ - INFO - Temperature: 0.6
+2024-12-19 12:05:03,664 - __main__ - INFO - Top_p: 0.7
+2024-12-19 12:05:11,550 - __main__ - INFO - Running evaluation
+2024-12-19 12:10:28,576 - root - ERROR - Error processing batch starting at index 352: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 17 (char 16) [type=value_error.jsondecode, input_value='{ "reasoning" : "} 3/2 3.../2 3/2 3/2 3/2 3/2 3/2 ', input_type=str]
+2024-12-19 12:10:59,601 - root - INFO - Evaluation completed. Processed 394/410 examples
+2024-12-19 12:10:59,601 - root - INFO - Skipped 16 examples at indices: [352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367]
+2024-12-19 12:10:59,628 - __main__ - INFO - Trial 4 completed with accuracy: 0.2995
+2024-12-19 12:10:59,679 - __main__ - INFO - 
+Starting trial 5
+2024-12-19 12:10:59,702 - __main__ - INFO - Trial 5 parameters:
+2024-12-19 12:10:59,702 - __main__ - INFO - Temperature: 0.1
+2024-12-19 12:10:59,703 - __main__ - INFO - Top_p: 0.9
+2024-12-19 12:11:08,774 - __main__ - INFO - Running evaluation
+2024-12-19 12:17:03,177 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-19 12:17:03,202 - __main__ - INFO - Trial 5 completed with accuracy: 0.3220
+2024-12-19 12:17:03,253 - __main__ - INFO - 
+Starting trial 6
+2024-12-19 12:17:03,276 - __main__ - INFO - Trial 6 parameters:
+2024-12-19 12:17:03,276 - __main__ - INFO - Temperature: 0.8
+2024-12-19 12:17:03,276 - __main__ - INFO - Top_p: 0.2
+2024-12-19 12:17:12,385 - __main__ - INFO - Running evaluation
+2024-12-19 12:23:04,931 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-19 12:23:04,958 - __main__ - INFO - Trial 6 completed with accuracy: 0.3293
+2024-12-19 12:23:05,012 - __main__ - INFO - 
+Starting trial 7
+2024-12-19 12:23:05,037 - __main__ - INFO - Trial 7 parameters:
+2024-12-19 12:23:05,037 - __main__ - INFO - Temperature: 0.2
+2024-12-19 12:23:05,037 - __main__ - INFO - Top_p: 0.2
+2024-12-19 12:23:14,060 - __main__ - INFO - Running evaluation
+2024-12-19 13:57:15,476 - __main__ - INFO - Creating new study: mmlu_opt_unconstrained_None_20241219_1357
+2024-12-19 13:57:15,476 - __main__ - INFO - Setting up random seeds
+2024-12-19 13:57:15,579 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-19 13:57:15,634 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-19 13:57:15,634 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-19 13:57:15,634 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-19 13:57:15,635 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-19 13:57:15,635 - __main__ - INFO - Initializing accelerator
+2024-12-19 13:57:15,690 - __main__ - INFO - Accelerator initialized successfully
+2024-12-19 13:57:15,691 - __main__ - INFO - Loading tokenizer
+2024-12-19 13:57:16,112 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-19 13:57:16,112 - __main__ - INFO - Loading model for unconstrained evaluation
+2024-12-19 13:57:46,383 - __main__ - INFO - Model loaded successfully
+2024-12-19 13:57:46,384 - __main__ - INFO - Configuring model tokens
+2024-12-19 13:57:46,394 - __main__ - INFO - Token configuration completed
+2024-12-19 13:57:46,395 - __main__ - INFO - Preparing model with accelerator
+2024-12-19 13:57:46,395 - __main__ - INFO - Model preparation completed
+2024-12-19 13:57:46,395 - __main__ - INFO - Loading dataset
+2024-12-19 13:57:48,908 - __main__ - INFO - Dataset loaded successfully with 12032 examples
+2024-12-19 13:57:48,909 - __main__ - INFO - Environment setup completed successfully
+2024-12-19 13:57:49,030 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-19 13:57:49,030 - __main__ - INFO - 
+Starting optimization for subject: None
+2024-12-19 13:57:49,030 - __main__ - INFO - Evaluation type: unconstrained
+2024-12-19 13:57:49,049 - __main__ - INFO - 
+Starting trial 0
+2024-12-19 13:57:49,073 - __main__ - INFO - Trial 0 parameters:
+2024-12-19 13:57:49,073 - __main__ - INFO - Temperature: 0.4
+2024-12-19 13:57:49,073 - __main__ - INFO - Top_p: 0.9
+2024-12-19 13:57:49,110 - __main__ - INFO - Running evaluation
+2024-12-19 13:58:53,462 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241219_1358
+2024-12-19 13:58:53,463 - __main__ - INFO - Setting up random seeds
+2024-12-19 13:58:53,556 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-19 13:58:53,612 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-19 13:58:53,615 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-19 13:58:53,615 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-19 13:58:53,615 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-19 13:58:53,615 - __main__ - INFO - Initializing accelerator
+2024-12-19 13:58:53,659 - __main__ - INFO - Accelerator initialized successfully
+2024-12-19 13:58:53,660 - __main__ - INFO - Loading tokenizer
+2024-12-19 13:58:54,112 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-19 13:58:54,112 - __main__ - INFO - Loading dataset
+2024-12-19 13:58:57,552 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-19 13:58:57,553 - __main__ - INFO - Environment setup completed successfully
+2024-12-19 13:58:57,737 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-19 13:58:57,737 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-19 13:58:57,738 - __main__ - INFO - Evaluation type: constrained
+2024-12-19 13:58:57,820 - __main__ - INFO - 
+Starting trial 0
+2024-12-19 13:58:57,856 - __main__ - INFO - Trial 0 parameters:
+2024-12-19 13:58:57,856 - __main__ - INFO - Temperature: 0.4
+2024-12-19 13:58:57,856 - __main__ - INFO - Top_p: 0.9
+2024-12-19 13:59:48,004 - __main__ - INFO - Running evaluation
+2024-12-19 14:18:02,615 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-19 14:18:02,640 - __main__ - INFO - Trial 0 completed with accuracy: 0.3610
+2024-12-19 14:18:02,694 - __main__ - INFO - 
+Starting trial 1
+2024-12-19 14:18:02,718 - __main__ - INFO - Trial 1 parameters:
+2024-12-19 14:18:02,718 - __main__ - INFO - Temperature: 0.7
+2024-12-19 14:18:02,718 - __main__ - INFO - Top_p: 0.6
+2024-12-19 14:18:30,728 - __main__ - INFO - Running evaluation
+2024-12-19 14:45:28,163 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_computer science_20241219_1358
+2024-12-19 14:45:28,164 - __main__ - INFO - Setting up random seeds
+2024-12-19 14:45:28,249 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-19 14:45:28,304 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-19 14:45:28,305 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-19 14:45:28,305 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-19 14:45:28,305 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-19 14:45:28,305 - __main__ - INFO - Initializing accelerator
+2024-12-19 14:45:28,351 - __main__ - INFO - Accelerator initialized successfully
+2024-12-19 14:45:28,351 - __main__ - INFO - Loading tokenizer
+2024-12-19 14:45:28,839 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-19 14:45:28,839 - __main__ - INFO - Loading dataset
+2024-12-19 14:45:32,919 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-19 14:45:32,920 - __main__ - INFO - Environment setup completed successfully
+2024-12-19 14:45:33,115 - __main__ - INFO - Study has 1 completed and 0 failed trials
+2024-12-19 14:45:33,115 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-19 14:45:33,116 - __main__ - INFO - Evaluation type: constrained
+2024-12-19 14:45:33,145 - __main__ - INFO - 
+Starting trial 2
+2024-12-19 14:45:33,174 - __main__ - INFO - Trial 2 parameters:
+2024-12-19 14:45:33,174 - __main__ - INFO - Temperature: 0.4
+2024-12-19 14:45:33,174 - __main__ - INFO - Top_p: 0.9
+2024-12-19 14:46:26,704 - __main__ - INFO - Running evaluation
+2024-12-19 15:04:39,641 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-19 15:04:39,667 - __main__ - INFO - Trial 2 completed with accuracy: 0.3610
+2024-12-19 15:04:39,719 - __main__ - INFO - 
+Starting trial 3
+2024-12-19 15:04:39,743 - __main__ - INFO - Trial 3 parameters:
+2024-12-19 15:04:39,744 - __main__ - INFO - Temperature: 0.7
+2024-12-19 15:04:39,744 - __main__ - INFO - Top_p: 0.6
+2024-12-19 15:05:05,851 - __main__ - INFO - Running evaluation
+2024-12-19 15:23:01,308 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-19 15:23:01,341 - __main__ - INFO - Trial 3 completed with accuracy: 0.3683
+2024-12-19 15:23:01,406 - __main__ - INFO - 
+Starting trial 4
+2024-12-19 15:23:01,430 - __main__ - INFO - Trial 4 parameters:
+2024-12-19 15:23:01,430 - __main__ - INFO - Temperature: 0.2
+2024-12-19 15:23:01,430 - __main__ - INFO - Top_p: 0.2
+2024-12-19 15:23:27,351 - __main__ - INFO - Running evaluation
+2024-12-19 15:40:28,519 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-19 15:40:28,544 - __main__ - INFO - Trial 4 completed with accuracy: 0.3707
+2024-12-19 15:40:28,600 - __main__ - INFO - 
+Starting trial 5
+2024-12-19 15:40:28,624 - __main__ - INFO - Trial 5 parameters:
+2024-12-19 15:40:28,624 - __main__ - INFO - Temperature: 0.1
+2024-12-19 15:40:28,624 - __main__ - INFO - Top_p: 0.8
+2024-12-19 15:40:54,164 - __main__ - INFO - Running evaluation
+2024-12-19 15:59:06,186 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-19 15:59:06,215 - __main__ - INFO - Trial 5 completed with accuracy: 0.3610
+2024-12-19 15:59:06,268 - __main__ - INFO - 
+Starting trial 6
+2024-12-19 15:59:06,293 - __main__ - INFO - Trial 6 parameters:
+2024-12-19 15:59:06,293 - __main__ - INFO - Temperature: 0.6
+2024-12-19 15:59:06,293 - __main__ - INFO - Top_p: 0.7
+2024-12-19 15:59:32,962 - __main__ - INFO - Running evaluation
+2024-12-19 16:12:34,399 - root - ERROR - Error processing batch starting at index 272: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 16 (char 15) [type=value_error.jsondecode, input_value='{ "reasoning": ">>H(k∥...m∥w∥w)  =...H(k∥m', input_type=str]
+2024-12-19 16:17:43,778 - root - INFO - Evaluation completed. Processed 394/410 examples
+2024-12-19 16:17:43,778 - root - INFO - Skipped 16 examples at indices: [272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287]
+2024-12-19 16:17:43,803 - __main__ - INFO - Trial 6 completed with accuracy: 0.3706
+2024-12-19 16:17:43,859 - __main__ - INFO - 
+Starting trial 7
+2024-12-19 16:17:43,884 - __main__ - INFO - Trial 7 parameters:
+2024-12-19 16:17:43,884 - __main__ - INFO - Temperature: 0.1
+2024-12-19 16:17:43,884 - __main__ - INFO - Top_p: 0.9
+2024-12-19 16:18:10,214 - __main__ - INFO - Running evaluation
+2024-12-19 16:36:07,888 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-19 16:36:07,920 - __main__ - INFO - Trial 7 completed with accuracy: 0.3537
+2024-12-19 16:36:07,975 - __main__ - INFO - 
+Starting trial 8
+2024-12-19 16:36:08,001 - __main__ - INFO - Trial 8 parameters:
+2024-12-19 16:36:08,001 - __main__ - INFO - Temperature: 0.8
+2024-12-19 16:36:08,001 - __main__ - INFO - Top_p: 0.2
+2024-12-19 16:36:35,331 - __main__ - INFO - Running evaluation

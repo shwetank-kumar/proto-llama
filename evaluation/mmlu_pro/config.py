@@ -48,7 +48,7 @@ class ModelConfig:
     device_map: str = "auto"
     prompt_id: str = "basic"
     n_bos_tokens: int = 256
-    max_new_tokens: int = 512
+    max_new_tokens: int = 256
     verbose: bool = False
     
     @property
