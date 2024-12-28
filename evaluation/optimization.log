@@ -1222,3 +1222,1120 @@ Starting trial 8
 2024-12-19 16:36:08,001 - __main__ - INFO - Temperature: 0.8
 2024-12-19 16:36:08,001 - __main__ - INFO - Top_p: 0.2
 2024-12-19 16:36:35,331 - __main__ - INFO - Running evaluation
+2024-12-20 14:53:39,343 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 354, in main
+    study = optuna.load_study(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/_convert_positional_args.py", line 83, in converter_wrapper
+    return func(**kwargs)  # type: ignore[call-arg]
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 1370, in load_study
+    return Study(study_name=study_name, storage=storage, sampler=sampler, pruner=pruner)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 87, in __init__
+    study_id = storage.get_study_id_from_name(study_name)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/storages/_cached_storage.py", line 109, in get_study_id_from_name
+    return self._backend.get_study_id_from_name(study_name)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/storages/_rdb/storage.py", line 337, in get_study_id_from_name
+    study = models.StudyModel.find_or_raise_by_name(study_name, session)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/storages/_rdb/models.py", line 87, in find_or_raise_by_name
+    raise KeyError(NOT_FOUND_MSG)
+KeyError: 'Record does not exist.'
+2024-12-20 14:55:36,899 - __main__ - WARNING - Study 'mmlu_opt_constrained_computer science_20241219_135' not found. Creating new study.
+2024-12-20 14:55:37,030 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 370, in main
+    optimizer = MMPROOptimizer(
+TypeError: MMPROOptimizer.__init__() got an unexpected keyword argument 'study'
+2024-12-20 14:56:33,678 - __main__ - INFO - Successfully loaded existing study: mmlu_opt_constrained_computer science_20241219_1358
+2024-12-20 14:56:33,678 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 370, in main
+    optimizer = MMPROOptimizer(
+TypeError: MMPROOptimizer.__init__() got an unexpected keyword argument 'study'
+2024-12-20 14:58:18,742 - __main__ - INFO - Successfully loaded existing study: mmlu_opt_constrained_computer science_20241219_1358
+2024-12-20 14:58:19,175 - __main__ - ERROR - Error during initialization: Study 'mmlu_opt_constrained_computer science_20241219_1358' not found in database
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 98, in __init__
+    raise ValueError(f"Study '{study_name}' not found in database")
+ValueError: Study 'mmlu_opt_constrained_computer science_20241219_1358' not found in database
+2024-12-20 14:58:19,175 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 388, in main
+    optimizer = MMPROOptimizer(
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 98, in __init__
+    raise ValueError(f"Study '{study_name}' not found in database")
+ValueError: Study 'mmlu_opt_constrained_computer science_20241219_1358' not found in database
+2024-12-20 15:03:03,784 - __main__ - INFO - Successfully loaded existing study: mmlu_opt_constrained_computer science_20241219_1358
+2024-12-20 15:03:03,793 - __main__ - INFO - Using existing study with 9 trials
+2024-12-20 15:03:03,915 - __main__ - ERROR - Error during initialization: Study 'mmlu_opt_constrained_computer science_20241219_1358' not found in database
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 101, in __init__
+    raise ValueError(f"Study '{study_name}' not found in database")
+ValueError: Study 'mmlu_opt_constrained_computer science_20241219_1358' not found in database
+2024-12-20 15:03:03,915 - __main__ - ERROR - Error loading study: Study 'mmlu_opt_constrained_computer science_20241219_1358' not found in database
+2024-12-20 15:03:03,916 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 391, in main
+    optimizer = MMPROOptimizer(
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 101, in __init__
+    raise ValueError(f"Study '{study_name}' not found in database")
+ValueError: Study 'mmlu_opt_constrained_computer science_20241219_1358' not found in database
+2024-12-20 15:06:11,880 - __main__ - INFO - Successfully loaded study: mmlu_opt_constrained_computer science_20241219_1358 with 9 trials
+2024-12-20 15:06:11,888 - __main__ - INFO - Using existing study with 9 trials
+2024-12-20 15:06:12,011 - __main__ - INFO - Creating new study: mmlu_opt_unconstrained_None_20241220_1506
+2024-12-20 15:06:12,011 - __main__ - INFO - Setting up random seeds
+2024-12-20 15:06:12,104 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-20 15:06:12,166 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-20 15:06:12,168 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-20 15:06:12,168 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-20 15:06:12,168 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-20 15:06:12,168 - __main__ - INFO - Initializing accelerator
+2024-12-20 15:06:12,213 - __main__ - INFO - Accelerator initialized successfully
+2024-12-20 15:06:12,213 - __main__ - INFO - Loading tokenizer
+2024-12-20 15:06:12,658 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-20 15:06:12,658 - __main__ - INFO - Loading model for unconstrained evaluation
+2024-12-20 15:06:44,699 - __main__ - INFO - Model loaded successfully
+2024-12-20 15:06:44,699 - __main__ - INFO - Configuring model tokens
+2024-12-20 15:06:44,710 - __main__ - INFO - Token configuration completed
+2024-12-20 15:06:44,710 - __main__ - INFO - Preparing model with accelerator
+2024-12-20 15:06:44,711 - __main__ - INFO - Model preparation completed
+2024-12-20 15:06:44,711 - __main__ - INFO - Loading dataset
+2024-12-20 15:06:47,644 - __main__ - INFO - Dataset loaded successfully with 12032 examples
+2024-12-20 15:06:47,644 - __main__ - INFO - Environment setup completed successfully
+2024-12-20 15:06:47,795 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-20 15:06:47,795 - __main__ - INFO - 
+Starting optimization for subject: None
+2024-12-20 15:06:47,795 - __main__ - INFO - Evaluation type: unconstrained
+2024-12-20 15:06:47,854 - __main__ - INFO - 
+Starting trial 0
+2024-12-20 15:06:47,854 - __main__ - INFO - Trial 0 parameters:
+2024-12-20 15:06:47,854 - __main__ - INFO - Temperature: 0.4
+2024-12-20 15:06:47,854 - __main__ - INFO - Top_p: 0.9
+2024-12-20 15:06:47,903 - __main__ - INFO - Running evaluation
+2024-12-20 15:11:57,556 - __main__ - INFO - Successfully loaded study: mmlu_opt_constrained_computer science_20241219_1358 with 9 trials
+2024-12-20 15:11:57,564 - __main__ - INFO - Using existing study with 9 trials
+2024-12-20 15:11:57,701 - __main__ - INFO - Creating new study: mmlu_opt_unconstrained_None_20241220_1511
+2024-12-20 15:11:57,701 - __main__ - INFO - Setting up random seeds
+2024-12-20 15:11:57,778 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-20 15:11:57,826 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-20 15:11:57,826 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-20 15:11:57,827 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-20 15:11:57,827 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-20 15:11:57,827 - __main__ - INFO - Initializing accelerator
+2024-12-20 15:11:57,869 - __main__ - INFO - Accelerator initialized successfully
+2024-12-20 15:11:57,869 - __main__ - INFO - Loading tokenizer
+2024-12-20 15:11:58,306 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-20 15:11:58,306 - __main__ - INFO - Loading model for unconstrained evaluation
+2024-12-20 15:14:21,011 - __main__ - INFO - Successfully loaded study: mmlu_opt_constrained_computer science_20241219_1358 with 9 trials
+2024-12-20 15:14:21,020 - __main__ - INFO - Using existing study with 9 trials
+2024-12-20 15:14:21,154 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241220_1514
+2024-12-20 15:14:21,154 - __main__ - INFO - Setting up random seeds
+2024-12-20 15:14:21,246 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-20 15:14:21,293 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-20 15:14:21,293 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-20 15:14:21,293 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-20 15:14:21,294 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-20 15:14:21,294 - __main__ - INFO - Initializing accelerator
+2024-12-20 15:14:21,344 - __main__ - INFO - Accelerator initialized successfully
+2024-12-20 15:14:21,344 - __main__ - INFO - Loading tokenizer
+2024-12-20 15:14:22,091 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-20 15:14:22,091 - __main__ - INFO - Loading dataset
+2024-12-20 15:14:25,276 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-20 15:14:25,276 - __main__ - INFO - Environment setup completed successfully
+2024-12-20 15:14:25,423 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-20 15:14:25,428 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-20 15:14:25,429 - __main__ - INFO - 
+Starting optimization for subject: computer science
+2024-12-20 15:14:25,429 - __main__ - INFO - Evaluation type: constrained
+2024-12-20 15:14:25,429 - __main__ - INFO - Resuming from trial 0
+2024-12-20 15:14:25,488 - __main__ - INFO - 
+Starting trial 0
+2024-12-20 15:14:25,488 - __main__ - INFO - Trial 0 parameters:
+2024-12-20 15:14:25,489 - __main__ - INFO - Temperature: 0.4
+2024-12-20 15:14:25,489 - __main__ - INFO - Top_p: 0.9
+2024-12-20 15:19:07,522 - __main__ - ERROR - Study 'mmlu_opt_constrained_computer science_20241219_1358' not found or criteria mismatch. Available studies:
+2024-12-20 15:19:07,522 - __main__ - INFO - - mmlu_opt_constrained_computer science_20241219_1358 (subject: None, type: constrained)
+2024-12-20 15:19:07,522 - __main__ - INFO - - mmlu_opt_constrained_computer science_20241219_135 (subject: None, type: None)
+2024-12-20 15:19:07,522 - __main__ - INFO - - mmlu_opt_constrained_computer science_20241220_1514 (subject: None, type: constrained)
+2024-12-20 15:19:07,522 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 406, in main
+    raise ValueError(f"Study not found or criteria mismatch")
+ValueError: Study not found or criteria mismatch
+2024-12-20 15:36:14,934 - __main__ - ERROR - Study 'mmlu_opt_constrained_computer science_20241219_1358' not found or criteria mismatch. Available studies:
+2024-12-20 15:36:14,935 - __main__ - INFO - - mmlu_opt_constrained_computer science_20241219_1358 (subject: None, type: constrained)
+2024-12-20 15:36:14,935 - __main__ - INFO - - mmlu_opt_constrained_computer science_20241219_135 (subject: None, type: None)
+2024-12-20 15:36:14,935 - __main__ - INFO - - mmlu_opt_constrained_computer science_20241220_1514 (subject: None, type: constrained)
+2024-12-20 15:36:14,935 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 459, in main
+    raise ValueError(f"Study not found or criteria mismatch")
+ValueError: Study not found or criteria mismatch
+2024-12-20 15:39:26,520 - __main__ - INFO - Successfully loaded study: mmlu_opt_constrained_computer science_20241219_1358
+2024-12-20 15:39:26,533 - __main__ - INFO - Using existing study with 9 trials
+2024-12-20 15:39:26,676 - __main__ - INFO - Creating new study: mmlu_opt_constrained_computer science_20241220_1539
+2024-12-20 15:39:26,677 - __main__ - INFO - Setting up random seeds
+2024-12-20 15:39:26,757 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-20 15:39:26,805 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-20 15:39:26,805 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-20 15:39:26,806 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-20 15:39:26,806 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-20 15:39:26,806 - __main__ - INFO - Initializing accelerator
+2024-12-20 15:39:26,849 - __main__ - INFO - Accelerator initialized successfully
+2024-12-20 15:39:26,849 - __main__ - INFO - Loading tokenizer
+2024-12-20 15:39:27,296 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-20 15:39:27,296 - __main__ - INFO - Loading dataset
+2024-12-20 15:39:30,909 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-20 15:39:30,909 - __main__ - INFO - Environment setup completed successfully
+2024-12-20 15:39:31,057 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-20 15:39:31,113 - __main__ - INFO - 
+Starting trial 0
+2024-12-20 15:39:31,113 - __main__ - INFO - Trial 0 parameters:
+2024-12-20 15:39:31,113 - __main__ - INFO - Temperature: 0.4
+2024-12-20 15:39:31,113 - __main__ - INFO - Top_p: 0.9
+2024-12-20 15:42:41,153 - __main__ - INFO - Loaded existing study: mmlu_opt_constrained_computer science_20241219_1358
+2024-12-20 15:42:41,164 - __main__ - INFO - Number of trials: 9
+2024-12-20 15:42:41,173 - __main__ - INFO - Using existing study with 9 trials
+2024-12-20 15:42:41,321 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_computer science_20241219_1358
+2024-12-20 15:42:41,321 - __main__ - INFO - Setting up random seeds
+2024-12-20 15:42:41,406 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-20 15:42:41,454 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-20 15:42:41,455 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-20 15:42:41,455 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-20 15:42:41,455 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-20 15:42:41,455 - __main__ - INFO - Initializing accelerator
+2024-12-20 15:42:41,497 - __main__ - INFO - Accelerator initialized successfully
+2024-12-20 15:42:41,497 - __main__ - INFO - Loading tokenizer
+2024-12-20 15:42:41,936 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-20 15:42:41,937 - __main__ - INFO - Loading dataset
+2024-12-20 15:42:45,445 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-20 15:42:45,445 - __main__ - INFO - Environment setup completed successfully
+2024-12-20 15:42:45,594 - __main__ - INFO - Study has 7 completed and 0 failed trials
+2024-12-20 15:42:45,608 - __main__ - ERROR - Error during optimization
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 291, in optimize
+    self.study = continue_optimization(self.study, self.n_trials)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 46, in continue_optimization
+    trial._state = optuna.trial.TrialState.FAILED
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/enum.py", line 437, in __getattr__
+    raise AttributeError(name) from None
+AttributeError: FAILED
+2024-12-20 15:42:45,619 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 489, in main
+    results = optimizer.optimize()
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 291, in optimize
+    self.study = continue_optimization(self.study, self.n_trials)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 46, in continue_optimization
+    trial._state = optuna.trial.TrialState.FAILED
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/enum.py", line 437, in __getattr__
+    raise AttributeError(name) from None
+AttributeError: FAILED
+2024-12-20 15:44:20,871 - __main__ - INFO - Loaded existing study: mmlu_opt_constrained_computer science_20241219_1358
+2024-12-20 15:44:20,881 - __main__ - INFO - Number of trials: 9
+2024-12-20 15:44:20,891 - __main__ - INFO - Using existing study with 9 trials
+2024-12-20 15:44:21,038 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_computer science_20241219_1358
+2024-12-20 15:44:21,038 - __main__ - INFO - Setting up random seeds
+2024-12-20 15:44:21,150 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-20 15:44:21,201 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-20 15:44:21,202 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-20 15:44:21,202 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-20 15:44:21,202 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-20 15:44:21,202 - __main__ - INFO - Initializing accelerator
+2024-12-20 15:44:21,253 - __main__ - INFO - Accelerator initialized successfully
+2024-12-20 15:44:21,253 - __main__ - INFO - Loading tokenizer
+2024-12-20 15:44:21,804 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-20 15:44:21,805 - __main__ - INFO - Loading dataset
+2024-12-20 15:44:25,075 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-20 15:44:25,075 - __main__ - INFO - Environment setup completed successfully
+2024-12-20 15:44:25,229 - __main__ - INFO - Study has 7 completed and 0 failed trials
+2024-12-20 15:44:25,260 - __main__ - INFO - Resuming from trial 8
+2024-12-20 15:44:25,268 - __main__ - INFO - Best accuracy so far: 0.3707
+2024-12-20 15:44:25,331 - __main__ - INFO - 
+Starting trial 9
+2024-12-20 15:44:25,331 - __main__ - INFO - Trial 9 parameters:
+2024-12-20 15:44:25,331 - __main__ - INFO - Temperature: 0.4
+2024-12-20 15:44:25,331 - __main__ - INFO - Top_p: 0.9
+2024-12-20 15:45:15,640 - __main__ - INFO - Running evaluation
+2024-12-20 17:39:40,904 - __main__ - INFO - Loaded existing study: mmlu_opt_constrained_computer science_20241219_1358
+2024-12-20 17:39:40,916 - __main__ - INFO - Number of trials: 10
+2024-12-20 17:39:40,925 - __main__ - INFO - Using existing study with 10 trials
+2024-12-20 17:39:41,144 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_computer science_20241219_1358
+2024-12-20 17:39:41,144 - __main__ - INFO - Setting up random seeds
+2024-12-20 17:39:41,235 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-20 17:39:41,293 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-20 17:39:41,294 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-20 17:39:41,294 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-20 17:39:41,294 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-20 17:39:41,294 - __main__ - INFO - Initializing accelerator
+2024-12-20 17:39:41,343 - __main__ - INFO - Accelerator initialized successfully
+2024-12-20 17:39:41,344 - __main__ - INFO - Loading tokenizer
+2024-12-20 17:39:41,786 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-20 17:39:41,787 - __main__ - INFO - Loading dataset
+2024-12-20 17:39:47,105 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-20 17:39:47,105 - __main__ - INFO - Environment setup completed successfully
+2024-12-20 17:39:47,227 - __main__ - INFO - Study has 7 completed and 1 failed trials
+2024-12-20 17:39:47,247 - __main__ - INFO - Resuming from trial 8
+2024-12-20 17:39:47,256 - __main__ - INFO - Best accuracy so far: 0.3707
+2024-12-20 17:39:47,313 - __main__ - INFO - 
+Starting trial 10
+2024-12-20 17:39:47,313 - __main__ - INFO - Trial 10 parameters:
+2024-12-20 17:39:47,313 - __main__ - INFO - Temperature: 0.4
+2024-12-20 17:39:47,313 - __main__ - INFO - Top_p: 0.9
+2024-12-20 17:40:43,042 - __main__ - INFO - Running evaluation
+2024-12-20 17:58:59,583 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-20 17:58:59,615 - __main__ - INFO - Trial 10 completed with accuracy: 0.3610
+2024-12-20 17:59:10,822 - __main__ - INFO - 
+Starting trial 11
+2024-12-20 17:59:10,822 - __main__ - INFO - Trial 11 parameters:
+2024-12-20 17:59:10,823 - __main__ - INFO - Temperature: 0.3
+2024-12-20 17:59:10,823 - __main__ - INFO - Top_p: 0.9
+2024-12-20 17:59:40,645 - __main__ - INFO - Running evaluation
+2024-12-20 18:18:37,976 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-20 18:18:38,009 - __main__ - INFO - Trial 11 completed with accuracy: 0.3561
+2024-12-20 18:18:49,286 - __main__ - INFO - 
+Starting trial 12
+2024-12-20 18:18:49,287 - __main__ - INFO - Trial 12 parameters:
+2024-12-20 18:18:49,287 - __main__ - INFO - Temperature: 0.3
+2024-12-20 18:18:49,287 - __main__ - INFO - Top_p: 0.8
+2024-12-20 18:19:17,749 - __main__ - INFO - Running evaluation
+2024-12-20 18:37:49,976 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-20 18:37:50,008 - __main__ - INFO - Trial 12 completed with accuracy: 0.4024
+2024-12-20 18:37:58,056 - __main__ - INFO - 
+Starting trial 13
+2024-12-20 18:37:58,056 - __main__ - INFO - Trial 13 parameters:
+2024-12-20 18:37:58,056 - __main__ - INFO - Temperature: 0.3
+2024-12-20 18:37:58,057 - __main__ - INFO - Top_p: 0.7
+2024-12-20 18:38:26,213 - __main__ - INFO - Running evaluation
+2024-12-20 18:56:48,280 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-20 18:56:48,308 - __main__ - INFO - Trial 13 completed with accuracy: 0.3390
+2024-12-20 18:56:58,943 - __main__ - INFO - 
+Starting trial 14
+2024-12-20 18:56:58,943 - __main__ - INFO - Trial 14 parameters:
+2024-12-20 18:56:58,944 - __main__ - INFO - Temperature: 0.2
+2024-12-20 18:56:58,944 - __main__ - INFO - Top_p: 0.6
+2024-12-20 18:57:26,954 - __main__ - INFO - Running evaluation
+2024-12-20 19:16:02,946 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-20 19:16:02,978 - __main__ - INFO - Trial 14 completed with accuracy: 0.3610
+2024-12-20 19:16:10,671 - __main__ - INFO - 
+Starting trial 15
+2024-12-20 19:16:10,672 - __main__ - INFO - Trial 15 parameters:
+2024-12-20 19:16:10,672 - __main__ - INFO - Temperature: 0.2
+2024-12-20 19:16:10,672 - __main__ - INFO - Top_p: 0.5
+2024-12-20 19:16:39,263 - __main__ - INFO - Running evaluation
+2024-12-20 19:34:06,163 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-20 19:34:06,197 - __main__ - INFO - Trial 15 completed with accuracy: 0.3829
+2024-12-20 19:34:16,639 - __main__ - INFO - 
+Starting trial 16
+2024-12-20 19:34:16,639 - __main__ - INFO - Trial 16 parameters:
+2024-12-20 19:34:16,639 - __main__ - INFO - Temperature: 0.2
+2024-12-20 19:34:16,640 - __main__ - INFO - Top_p: 0.4
+2024-12-20 19:34:44,712 - __main__ - INFO - Running evaluation
+2024-12-20 19:51:58,975 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-20 19:51:59,006 - __main__ - INFO - Trial 16 completed with accuracy: 0.3610
+2024-12-20 19:52:06,826 - __main__ - INFO - 
+Starting trial 17
+2024-12-20 19:52:06,826 - __main__ - INFO - Trial 17 parameters:
+2024-12-20 19:52:06,826 - __main__ - INFO - Temperature: 0.2
+2024-12-20 19:52:06,826 - __main__ - INFO - Top_p: 0.3
+2024-12-20 19:52:34,154 - __main__ - INFO - Running evaluation
+2024-12-20 20:09:38,997 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-20 20:09:39,028 - __main__ - INFO - Trial 17 completed with accuracy: 0.3732
+2024-12-20 20:09:46,834 - __main__ - INFO - 
+Starting trial 18
+2024-12-20 20:09:46,834 - __main__ - INFO - Trial 18 parameters:
+2024-12-20 20:09:46,835 - __main__ - INFO - Temperature: 0.1
+2024-12-20 20:09:46,835 - __main__ - INFO - Top_p: 0.2
+2024-12-20 20:10:15,055 - __main__ - INFO - Running evaluation
+2024-12-20 20:27:22,912 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-20 20:27:22,941 - __main__ - INFO - Trial 18 completed with accuracy: 0.3707
+2024-12-20 20:27:33,926 - __main__ - INFO - 
+Starting trial 19
+2024-12-20 20:27:33,926 - __main__ - INFO - Trial 19 parameters:
+2024-12-20 20:27:33,926 - __main__ - INFO - Temperature: 0.0
+2024-12-20 20:27:33,926 - __main__ - INFO - Top_p: 0.1
+2024-12-20 20:28:02,552 - __main__ - INFO - Running evaluation
+2024-12-20 20:45:09,005 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-20 20:45:09,037 - __main__ - INFO - Trial 19 completed with accuracy: 0.3707
+2024-12-20 20:45:19,500 - __main__ - INFO - 
+Starting trial 20
+2024-12-20 20:45:19,500 - __main__ - INFO - Trial 20 parameters:
+2024-12-20 20:45:19,500 - __main__ - INFO - Temperature: -0.1
+2024-12-20 20:45:19,500 - __main__ - INFO - Top_p: 0.0
+2024-12-20 20:45:23,183 - __main__ - ERROR - Error in trial 20: `temperature` must be a strictly positive floating point number, got -0.09999999999999998 instead.
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 267, in objective
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 53, in __init__
+    self.sampler = samplers.multinomial(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/samplers.py", line 118, in __init__
+    self.logits_processors.append(rescale_logits(temperature))
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/samplers.py", line 233, in rescale_logits
+    raise ValueError(
+ValueError: `temperature` must be a strictly positive floating point number, got -0.09999999999999998 instead.
+2024-12-20 20:45:23,226 - __main__ - ERROR - Error during optimization
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 324, in optimize
+    'model_name': self.base_config.model_name,
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 267, in objective
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 53, in __init__
+    self.sampler = samplers.multinomial(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/samplers.py", line 118, in __init__
+    self.logits_processors.append(rescale_logits(temperature))
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/samplers.py", line 233, in rescale_logits
+    raise ValueError(
+ValueError: `temperature` must be a strictly positive floating point number, got -0.09999999999999998 instead.
+2024-12-20 20:45:23,232 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 518, in main
+    print(f"{param}: {importance:.3f}")
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 324, in optimize
+    'model_name': self.base_config.model_name,
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 267, in objective
+  File "/mnt/c/code/proto-llama/evaluation/mmlu_pro_constrained/eval.py", line 53, in __init__
+    self.sampler = samplers.multinomial(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/samplers.py", line 118, in __init__
+    self.logits_processors.append(rescale_logits(temperature))
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/outlines/samplers.py", line 233, in rescale_logits
+    raise ValueError(
+ValueError: `temperature` must be a strictly positive floating point number, got -0.09999999999999998 instead.
+2024-12-21 09:06:53,959 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_090651
+2024-12-21 09:06:53,959 - __main__ - INFO - Setting up random seeds
+2024-12-21 09:06:54,072 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 09:06:54,121 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 09:06:54,122 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 09:06:54,122 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 09:06:54,122 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 09:06:54,122 - __main__ - INFO - Initializing accelerator
+2024-12-21 09:06:54,167 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 09:06:54,167 - __main__ - INFO - Loading tokenizer
+2024-12-21 09:06:54,609 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 09:06:54,609 - __main__ - INFO - Loading dataset
+2024-12-21 09:06:58,622 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 09:06:58,623 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 09:06:58,623 - __main__ - ERROR - Error during initialization: CmaEsSampler.__init__() got an unexpected keyword argument 'bounds'
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 153, in __init__
+    sampler = optuna.samplers.CmaEsSampler(
+TypeError: CmaEsSampler.__init__() got an unexpected keyword argument 'bounds'
+2024-12-21 09:06:58,626 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 503, in main
+    optimizer = MMPROOptimizer(
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 153, in __init__
+    sampler = optuna.samplers.CmaEsSampler(
+TypeError: CmaEsSampler.__init__() got an unexpected keyword argument 'bounds'
+2024-12-21 09:15:00,457 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_091459
+2024-12-21 09:15:00,457 - __main__ - INFO - Setting up random seeds
+2024-12-21 09:15:00,551 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 09:15:00,610 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 09:15:00,611 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 09:15:00,611 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 09:15:00,611 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 09:15:00,611 - __main__ - INFO - Initializing accelerator
+2024-12-21 09:15:00,654 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 09:15:00,654 - __main__ - INFO - Loading tokenizer
+2024-12-21 09:15:01,079 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 09:15:01,079 - __main__ - INFO - Loading dataset
+2024-12-21 09:15:04,515 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 09:15:04,515 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 09:15:04,674 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-21 09:15:04,741 - __main__ - INFO - 
+Starting trial 0
+2024-12-21 09:15:04,742 - __main__ - INFO - Trial 0 parameters:
+2024-12-21 09:15:04,742 - __main__ - INFO - Temperature: 0.4
+2024-12-21 09:15:04,742 - __main__ - INFO - Top_p: 0.9
+2024-12-21 09:15:04,773 - __main__ - ERROR - Error in trial 0: 'MMPROOptimizer' object has no attribute '_create_evaluator'
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 293, in objective
+    evaluator = self._create_evaluator(trial_config)
+AttributeError: 'MMPROOptimizer' object has no attribute '_create_evaluator'
+2024-12-21 09:15:04,804 - __main__ - ERROR - Error during optimization
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 328, in optimize
+    self.study.optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 293, in objective
+    evaluator = self._create_evaluator(trial_config)
+AttributeError: 'MMPROOptimizer' object has no attribute '_create_evaluator'
+2024-12-21 09:15:04,814 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 522, in main
+    results = optimizer.optimize()
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 328, in optimize
+    self.study.optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 293, in objective
+    evaluator = self._create_evaluator(trial_config)
+AttributeError: 'MMPROOptimizer' object has no attribute '_create_evaluator'
+2024-12-21 09:17:16,052 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_091714
+2024-12-21 09:17:16,052 - __main__ - INFO - Setting up random seeds
+2024-12-21 09:17:16,143 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 09:17:16,196 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 09:17:16,196 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 09:17:16,196 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 09:17:16,196 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 09:17:16,196 - __main__ - INFO - Initializing accelerator
+2024-12-21 09:17:16,244 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 09:17:16,245 - __main__ - INFO - Loading tokenizer
+2024-12-21 09:17:16,691 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 09:17:16,691 - __main__ - INFO - Loading dataset
+2024-12-21 09:17:18,049 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 09:17:18,049 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 09:17:18,212 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-21 09:17:18,282 - __main__ - INFO - 
+Starting trial 0
+2024-12-21 09:17:18,283 - __main__ - INFO - Trial 0 parameters:
+2024-12-21 09:17:18,283 - __main__ - INFO - Temperature: 0.4
+2024-12-21 09:17:18,283 - __main__ - INFO - Top_p: 0.9
+2024-12-21 09:17:18,317 - __main__ - ERROR - Error in trial 0: 'MMPROOptimizer' object has no attribute '_create_evaluator'
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 293, in objective
+    evaluator = self._create_evaluator(trial_config)
+AttributeError: 'MMPROOptimizer' object has no attribute '_create_evaluator'
+2024-12-21 09:17:18,345 - __main__ - ERROR - Error during optimization
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 328, in optimize
+    self.study.optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 293, in objective
+    evaluator = self._create_evaluator(trial_config)
+AttributeError: 'MMPROOptimizer' object has no attribute '_create_evaluator'
+2024-12-21 09:17:18,349 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 522, in main
+    results = optimizer.optimize()
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 328, in optimize
+    self.study.optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 293, in objective
+    evaluator = self._create_evaluator(trial_config)
+AttributeError: 'MMPROOptimizer' object has no attribute '_create_evaluator'
+2024-12-21 09:17:55,235 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_091754
+2024-12-21 09:17:55,235 - __main__ - INFO - Setting up random seeds
+2024-12-21 09:17:55,311 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 09:17:55,359 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 09:17:55,359 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 09:17:55,360 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 09:17:55,360 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 09:17:55,360 - __main__ - INFO - Initializing accelerator
+2024-12-21 09:17:55,392 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 09:17:55,392 - __main__ - INFO - Loading tokenizer
+2024-12-21 09:17:55,825 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 09:17:55,826 - __main__ - INFO - Loading dataset
+2024-12-21 09:17:58,944 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 09:17:58,944 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 09:17:59,096 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-21 09:17:59,163 - __main__ - INFO - 
+Starting trial 0
+2024-12-21 09:17:59,164 - __main__ - INFO - Trial 0 parameters:
+2024-12-21 09:17:59,164 - __main__ - INFO - Temperature: 0.4
+2024-12-21 09:17:59,164 - __main__ - INFO - Top_p: 0.9
+2024-12-21 09:17:59,204 - __main__ - ERROR - Error in trial 0: MMLPROEvaluatorConstr.__init__() missing 2 required positional arguments: 'tokenizer' and 'config'
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 302, in objective
+    evaluator = self._create_evaluator(trial_config)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 260, in _create_evaluator
+    return MMLPROEvaluatorConstr(config)
+TypeError: MMLPROEvaluatorConstr.__init__() missing 2 required positional arguments: 'tokenizer' and 'config'
+2024-12-21 09:17:59,229 - __main__ - ERROR - Error during optimization
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 337, in optimize
+    self.study.optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 302, in objective
+    evaluator = self._create_evaluator(trial_config)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 260, in _create_evaluator
+    return MMLPROEvaluatorConstr(config)
+TypeError: MMLPROEvaluatorConstr.__init__() missing 2 required positional arguments: 'tokenizer' and 'config'
+2024-12-21 09:17:59,234 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 531, in main
+    results = optimizer.optimize()
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 337, in optimize
+    self.study.optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 302, in objective
+    evaluator = self._create_evaluator(trial_config)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 260, in _create_evaluator
+    return MMLPROEvaluatorConstr(config)
+TypeError: MMLPROEvaluatorConstr.__init__() missing 2 required positional arguments: 'tokenizer' and 'config'
+2024-12-21 09:19:59,013 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_091957
+2024-12-21 09:19:59,013 - __main__ - INFO - Setting up random seeds
+2024-12-21 09:19:59,094 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 09:19:59,147 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 09:19:59,147 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 09:19:59,147 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 09:19:59,147 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 09:19:59,148 - __main__ - INFO - Initializing accelerator
+2024-12-21 09:19:59,191 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 09:19:59,191 - __main__ - INFO - Loading tokenizer
+2024-12-21 09:19:59,649 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 09:19:59,649 - __main__ - INFO - Loading dataset
+2024-12-21 09:20:02,907 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 09:20:02,908 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 09:20:03,061 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-21 09:20:03,131 - __main__ - INFO - 
+Starting trial 0
+2024-12-21 09:20:03,131 - __main__ - INFO - Trial 0 parameters:
+2024-12-21 09:20:03,131 - __main__ - INFO - Temperature: 0.4
+2024-12-21 09:20:03,132 - __main__ - INFO - Top_p: 0.9
+2024-12-21 09:20:03,174 - __main__ - ERROR - Error in trial 0: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'config'
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 301, in objective
+    evaluator = self._create_evaluator(trial_config)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 259, in _create_evaluator
+    return MMLPROEvaluatorConstr(self.tokenizer, config)
+TypeError: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'config'
+2024-12-21 09:20:03,200 - __main__ - ERROR - Error during optimization
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 336, in optimize
+    self.study.optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 301, in objective
+    evaluator = self._create_evaluator(trial_config)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 259, in _create_evaluator
+    return MMLPROEvaluatorConstr(self.tokenizer, config)
+TypeError: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'config'
+2024-12-21 09:20:03,205 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 530, in main
+    results = optimizer.optimize()
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 336, in optimize
+    self.study.optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 301, in objective
+    evaluator = self._create_evaluator(trial_config)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 259, in _create_evaluator
+    return MMLPROEvaluatorConstr(self.tokenizer, config)
+TypeError: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'config'
+2024-12-21 09:26:22,696 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_092621
+2024-12-21 09:26:22,696 - __main__ - INFO - Setting up random seeds
+2024-12-21 09:26:22,780 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 09:26:22,827 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 09:26:22,827 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 09:26:22,828 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 09:26:22,828 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 09:26:22,828 - __main__ - INFO - Initializing accelerator
+2024-12-21 09:26:22,868 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 09:26:22,868 - __main__ - INFO - Loading tokenizer
+2024-12-21 09:26:23,246 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 09:26:23,246 - __main__ - INFO - Loading dataset
+2024-12-21 09:26:26,450 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 09:26:26,451 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 09:26:26,602 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-21 09:26:26,676 - __main__ - INFO - 
+Starting trial 0
+2024-12-21 09:26:26,676 - __main__ - INFO - Trial 0 parameters:
+2024-12-21 09:26:26,676 - __main__ - INFO - Temperature: 0.4
+2024-12-21 09:26:26,676 - __main__ - INFO - Top_p: 0.9
+2024-12-21 09:26:26,710 - __main__ - ERROR - Error creating evaluator: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'model_name'
+2024-12-21 09:26:26,711 - __main__ - ERROR - Error in trial 0: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'model_name'
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 306, in objective
+    evaluator = self._create_evaluator(trial_config)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 262, in _create_evaluator
+    return MMLPROEvaluatorConstr(tokenizer=self.tokenizer, config=config)
+TypeError: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'model_name'
+2024-12-21 09:26:26,737 - __main__ - ERROR - Error during optimization
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 341, in optimize
+    self.study.optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 306, in objective
+    evaluator = self._create_evaluator(trial_config)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 262, in _create_evaluator
+    return MMLPROEvaluatorConstr(tokenizer=self.tokenizer, config=config)
+TypeError: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'model_name'
+2024-12-21 09:26:26,742 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 535, in main
+    results = optimizer.optimize()
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 341, in optimize
+    self.study.optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 306, in objective
+    evaluator = self._create_evaluator(trial_config)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 262, in _create_evaluator
+    return MMLPROEvaluatorConstr(tokenizer=self.tokenizer, config=config)
+TypeError: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'model_name'
+2024-12-21 09:29:32,157 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_092931
+2024-12-21 09:29:32,158 - __main__ - INFO - Setting up random seeds
+2024-12-21 09:29:32,240 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 09:29:32,291 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 09:29:32,292 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 09:29:32,292 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 09:29:32,292 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 09:29:32,292 - __main__ - INFO - Initializing accelerator
+2024-12-21 09:29:32,337 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 09:29:32,338 - __main__ - INFO - Loading tokenizer
+2024-12-21 09:29:32,775 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 09:29:32,775 - __main__ - INFO - Loading dataset
+2024-12-21 09:29:35,789 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 09:29:35,790 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 09:29:35,931 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-21 09:29:35,996 - __main__ - INFO - 
+Starting trial 0
+2024-12-21 09:29:35,996 - __main__ - INFO - Trial 0 parameters:
+2024-12-21 09:29:35,996 - __main__ - INFO - Temperature: 0.4
+2024-12-21 09:29:35,996 - __main__ - INFO - Top_p: 0.9
+2024-12-21 09:29:36,029 - __main__ - ERROR - Error creating evaluator: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'model_name'
+2024-12-21 09:29:36,029 - __main__ - ERROR - Error in trial 0: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'model_name'
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 309, in objective
+    evaluator = self._create_evaluator(trial_config)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 262, in _create_evaluator
+    return MMLPROEvaluatorConstr(tokenizer=self.tokenizer, config=config)
+TypeError: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'model_name'
+2024-12-21 09:29:36,054 - __main__ - ERROR - Error during optimization
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 344, in optimize
+    self.study.optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 309, in objective
+    evaluator = self._create_evaluator(trial_config)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 262, in _create_evaluator
+    return MMLPROEvaluatorConstr(tokenizer=self.tokenizer, config=config)
+TypeError: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'model_name'
+2024-12-21 09:29:36,059 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 538, in main
+    results = optimizer.optimize()
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 344, in optimize
+    self.study.optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/study.py", line 475, in optimize
+    _optimize(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 63, in _optimize
+    _optimize_sequential(
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 160, in _optimize_sequential
+    frozen_trial = _run_trial(study, func, catch)
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 248, in _run_trial
+    raise func_err
+  File "/home/shwetank/code/proto-llama/env-constrained-gen/lib/python3.10/site-packages/optuna/study/_optimize.py", line 197, in _run_trial
+    value_or_values = func(trial)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 309, in objective
+    evaluator = self._create_evaluator(trial_config)
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 262, in _create_evaluator
+    return MMLPROEvaluatorConstr(tokenizer=self.tokenizer, config=config)
+TypeError: MMLPROEvaluatorConstr.__init__() missing 1 required positional argument: 'model_name'
+2024-12-21 09:32:33,619 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_093231
+2024-12-21 09:32:33,619 - __main__ - INFO - Setting up random seeds
+2024-12-21 09:32:33,729 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 09:32:33,779 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 09:32:33,779 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 09:32:33,779 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 09:32:33,780 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 09:32:33,780 - __main__ - INFO - Initializing accelerator
+2024-12-21 09:32:33,825 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 09:32:33,825 - __main__ - INFO - Loading tokenizer
+2024-12-21 09:32:34,255 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 09:32:34,256 - __main__ - INFO - Loading dataset
+2024-12-21 09:32:38,359 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 09:32:38,359 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 09:32:38,501 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-21 09:32:38,566 - __main__ - INFO - 
+Starting trial 0
+2024-12-21 09:32:38,566 - __main__ - INFO - Trial 0 parameters:
+2024-12-21 09:32:38,567 - __main__ - INFO - Temperature: 0.4
+2024-12-21 09:32:38,567 - __main__ - INFO - Top_p: 0.9
+2024-12-21 09:36:42,182 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_093641
+2024-12-21 09:36:42,182 - __main__ - INFO - Setting up random seeds
+2024-12-21 09:36:42,252 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 09:36:42,299 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 09:36:42,299 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 09:36:42,299 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 09:36:42,300 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 09:36:42,300 - __main__ - INFO - Initializing accelerator
+2024-12-21 09:36:42,331 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 09:36:42,332 - __main__ - INFO - Loading tokenizer
+2024-12-21 09:36:42,757 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 09:36:42,757 - __main__ - INFO - Loading dataset
+2024-12-21 09:36:45,755 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 09:36:45,755 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 09:36:45,897 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-21 09:36:45,967 - __main__ - INFO - 
+Starting trial 0
+2024-12-21 09:36:45,967 - __main__ - INFO - Trial 0 parameters:
+2024-12-21 09:36:45,968 - __main__ - INFO - Temperature: 0.4
+2024-12-21 09:36:45,968 - __main__ - INFO - Top_p: 0.9
+2024-12-21 09:38:09,135 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_093807
+2024-12-21 09:38:09,135 - __main__ - INFO - Setting up random seeds
+2024-12-21 09:38:09,208 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 09:38:09,252 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 09:38:09,253 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 09:38:09,253 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 09:38:09,253 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 09:38:09,253 - __main__ - INFO - Initializing accelerator
+2024-12-21 09:38:09,345 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 09:38:09,345 - __main__ - INFO - Loading tokenizer
+2024-12-21 09:38:09,786 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 09:38:09,786 - __main__ - INFO - Loading dataset
+2024-12-21 09:38:13,334 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 09:38:13,334 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 09:38:13,487 - __main__ - INFO - Study has 0 completed and 0 failed trials
+2024-12-21 09:38:13,554 - __main__ - INFO - 
+Starting trial 0
+2024-12-21 09:38:13,555 - __main__ - INFO - Trial 0 parameters:
+2024-12-21 09:38:13,555 - __main__ - INFO - Temperature: 0.4
+2024-12-21 09:38:13,555 - __main__ - INFO - Top_p: 0.9
+2024-12-21 09:58:07,857 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 09:58:07,875 - __main__ - INFO - Trial 0 completed with accuracy: 0.3561
+2024-12-21 09:58:16,751 - __main__ - INFO - 
+Starting trial 1
+2024-12-21 09:58:16,751 - __main__ - INFO - Trial 1 parameters:
+2024-12-21 09:58:16,751 - __main__ - INFO - Temperature: 0.7
+2024-12-21 09:58:16,751 - __main__ - INFO - Top_p: 0.6
+2024-12-21 12:17:16,573 - __main__ - INFO - Loaded existing study: mmlu_opt_constrained_20241221_093807
+2024-12-21 12:17:16,583 - __main__ - INFO - Number of trials: 2
+2024-12-21 12:17:16,589 - __main__ - INFO - Using existing study with 2 trials
+2024-12-21 12:17:16,820 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_093807
+2024-12-21 12:17:16,820 - __main__ - INFO - Setting up random seeds
+2024-12-21 12:17:16,923 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 12:17:16,991 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 12:17:16,991 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 12:17:16,991 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 12:17:16,991 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 12:17:16,991 - __main__ - INFO - Initializing accelerator
+2024-12-21 12:17:17,043 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 12:17:17,043 - __main__ - INFO - Loading tokenizer
+2024-12-21 12:17:17,430 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 12:17:17,430 - __main__ - INFO - Loading dataset
+2024-12-21 12:17:22,365 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 12:17:22,366 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 12:17:22,529 - __main__ - INFO - Study has 1 completed and 0 failed trials
+2024-12-21 12:17:22,549 - __main__ - INFO - Resuming from trial 1
+2024-12-21 12:17:22,561 - __main__ - INFO - Best accuracy so far: 0.3561
+2024-12-21 12:17:22,656 - __main__ - INFO - 
+Starting trial 2
+2024-12-21 12:17:22,656 - __main__ - INFO - Trial 2 parameters:
+2024-12-21 12:17:22,656 - __main__ - INFO - Temperature: 0.4
+2024-12-21 12:17:22,656 - __main__ - INFO - Top_p: 0.9
+2024-12-21 12:37:25,529 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 12:37:25,552 - __main__ - INFO - Trial 2 completed with accuracy: 0.3561
+2024-12-21 12:37:36,176 - __main__ - INFO - 
+Starting trial 3
+2024-12-21 12:37:36,176 - __main__ - INFO - Trial 3 parameters:
+2024-12-21 12:37:36,176 - __main__ - INFO - Temperature: 0.7
+2024-12-21 12:37:36,176 - __main__ - INFO - Top_p: 0.6
+2024-12-21 12:56:36,161 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 12:56:36,182 - __main__ - INFO - Trial 3 completed with accuracy: 0.3537
+2024-12-21 12:56:44,264 - __main__ - INFO - 
+Starting trial 4
+2024-12-21 12:56:44,264 - __main__ - INFO - Trial 4 parameters:
+2024-12-21 12:56:44,265 - __main__ - INFO - Temperature: 0.2
+2024-12-21 12:56:44,265 - __main__ - INFO - Top_p: 0.2
+2024-12-21 13:14:16,187 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 13:14:16,206 - __main__ - INFO - Trial 4 completed with accuracy: 0.3707
+2024-12-21 13:14:26,916 - __main__ - INFO - 
+Starting trial 5
+2024-12-21 13:14:26,916 - __main__ - INFO - Trial 5 parameters:
+2024-12-21 13:14:26,916 - __main__ - INFO - Temperature: 0.1
+2024-12-21 13:14:26,917 - __main__ - INFO - Top_p: 0.8
+2024-12-21 13:32:23,602 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 13:32:23,623 - __main__ - INFO - Trial 5 completed with accuracy: 0.3707
+2024-12-21 13:32:34,035 - __main__ - INFO - 
+Starting trial 6
+2024-12-21 13:32:34,035 - __main__ - INFO - Trial 6 parameters:
+2024-12-21 13:32:34,035 - __main__ - INFO - Temperature: 0.1
+2024-12-21 13:32:34,036 - __main__ - INFO - Top_p: 0.1
+2024-12-21 13:50:14,570 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 13:50:14,590 - __main__ - INFO - Trial 6 completed with accuracy: 0.3707
+2024-12-21 13:50:22,543 - __main__ - INFO - 
+Starting trial 7
+2024-12-21 13:50:22,543 - __main__ - INFO - Trial 7 parameters:
+2024-12-21 13:50:22,543 - __main__ - INFO - Temperature: 0.5
+2024-12-21 13:50:22,543 - __main__ - INFO - Top_p: 0.1
+2024-12-21 14:07:53,727 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 14:07:53,748 - __main__ - INFO - Trial 7 completed with accuracy: 0.3707
+2024-12-21 14:08:04,209 - __main__ - INFO - 
+Starting trial 8
+2024-12-21 14:08:04,209 - __main__ - INFO - Trial 8 parameters:
+2024-12-21 14:08:04,210 - __main__ - INFO - Temperature: 0.3
+2024-12-21 14:08:04,210 - __main__ - INFO - Top_p: 0.4
+2024-12-21 14:26:35,982 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 14:26:36,001 - __main__ - INFO - Trial 8 completed with accuracy: 0.3756
+2024-12-21 14:26:46,406 - __main__ - INFO - 
+Starting trial 9
+2024-12-21 14:26:46,406 - __main__ - INFO - Trial 9 parameters:
+2024-12-21 14:26:46,407 - __main__ - INFO - Temperature: 0.3
+2024-12-21 14:26:46,407 - __main__ - INFO - Top_p: 0.5
+2024-12-21 14:45:52,744 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 14:45:52,764 - __main__ - INFO - Trial 9 completed with accuracy: 0.3878
+2024-12-21 14:46:03,219 - __main__ - INFO - 
+Starting trial 10
+2024-12-21 14:46:03,219 - __main__ - INFO - Trial 10 parameters:
+2024-12-21 14:46:03,219 - __main__ - INFO - Temperature: 0.0
+2024-12-21 14:46:03,219 - __main__ - INFO - Top_p: 0.5
+2024-12-21 15:03:48,075 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 15:03:48,094 - __main__ - INFO - Trial 10 completed with accuracy: 0.3805
+2024-12-21 15:03:58,545 - __main__ - INFO - 
+Starting trial 11
+2024-12-21 15:03:58,546 - __main__ - INFO - Trial 11 parameters:
+2024-12-21 15:03:58,546 - __main__ - INFO - Temperature: 0.8
+2024-12-21 15:03:58,546 - __main__ - INFO - Top_p: 0.1
+2024-12-21 15:21:39,690 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 15:21:39,710 - __main__ - INFO - Trial 11 completed with accuracy: 0.3634
+2024-12-21 15:21:50,668 - __main__ - INFO - 
+Starting trial 12
+2024-12-21 15:21:50,669 - __main__ - INFO - Trial 12 parameters:
+2024-12-21 15:21:50,669 - __main__ - INFO - Temperature: 0.0
+2024-12-21 15:21:50,669 - __main__ - INFO - Top_p: 0.4
+2024-12-21 15:39:29,789 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 15:39:29,811 - __main__ - INFO - Trial 12 completed with accuracy: 0.3732
+2024-12-21 15:39:37,965 - __main__ - INFO - 
+Starting trial 13
+2024-12-21 15:39:37,965 - __main__ - INFO - Trial 13 parameters:
+2024-12-21 15:39:37,965 - __main__ - INFO - Temperature: 0.3
+2024-12-21 15:39:37,966 - __main__ - INFO - Top_p: 0.6
+2024-12-21 15:57:58,692 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 15:57:58,712 - __main__ - INFO - Trial 13 completed with accuracy: 0.3610
+2024-12-21 15:58:06,512 - __main__ - INFO - 
+Starting trial 14
+2024-12-21 15:58:06,512 - __main__ - INFO - Trial 14 parameters:
+2024-12-21 15:58:06,512 - __main__ - INFO - Temperature: 0.1
+2024-12-21 15:58:06,512 - __main__ - INFO - Top_p: 0.6
+2024-12-21 18:13:42,031 - __main__ - ERROR - Study 'mmlu_opt_constrained_computer science_20241219_1358' not found. Available studies:
+2024-12-21 18:13:42,031 - __main__ - INFO - - mmlu_opt_constrained_20241221_093807
+2024-12-21 18:13:42,032 - __main__ - ERROR - Fatal error in main
+Traceback (most recent call last):
+  File "/mnt/c/code/proto-llama/evaluation/optimize_eval.py", line 518, in main
+    raise ValueError("Study not found")
+ValueError: Study not found
+2024-12-21 19:08:38,690 - __main__ - INFO - Loaded existing study: mmlu_opt_constrained_20241221_093807
+2024-12-21 19:08:38,704 - __main__ - INFO - Number of trials: 15
+2024-12-21 19:08:38,776 - __main__ - INFO - Using existing study with 15 trials
+2024-12-21 19:08:38,914 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_093807
+2024-12-21 19:08:38,914 - __main__ - INFO - Setting up random seeds
+2024-12-21 19:08:39,018 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 19:08:39,083 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 19:08:39,085 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 19:08:39,085 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 19:08:39,085 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 19:08:39,085 - __main__ - INFO - Initializing accelerator
+2024-12-21 19:08:39,138 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 19:08:39,138 - __main__ - INFO - Loading tokenizer
+2024-12-21 19:08:39,585 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 19:08:39,585 - __main__ - INFO - Loading dataset
+2024-12-21 19:08:43,773 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 19:08:43,773 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 19:08:43,939 - __main__ - INFO - Study has 13 completed and 0 failed trials
+2024-12-21 19:08:43,960 - __main__ - INFO - Resuming from trial 14
+2024-12-21 19:08:43,971 - __main__ - INFO - Best accuracy so far: 0.3878
+2024-12-21 19:08:44,060 - __main__ - INFO - 
+Starting trial 15
+2024-12-21 19:08:44,060 - __main__ - INFO - Trial 15 parameters:
+2024-12-21 19:08:44,061 - __main__ - INFO - Temperature: 0.3
+2024-12-21 19:08:44,061 - __main__ - INFO - Top_p: 0.4
+2024-12-21 19:25:04,334 - __main__ - INFO - Loaded existing study: mmlu_opt_constrained_20241221_093807
+2024-12-21 19:25:04,348 - __main__ - INFO - Number of trials: 16
+2024-12-21 19:25:04,418 - __main__ - INFO - Using existing study with 16 trials
+2024-12-21 19:25:04,552 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_093807
+2024-12-21 19:25:04,552 - __main__ - INFO - Setting up random seeds
+2024-12-21 19:25:04,653 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 19:25:04,712 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 19:25:04,713 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 19:25:04,713 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 19:25:04,713 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 19:25:04,713 - __main__ - INFO - Initializing accelerator
+2024-12-21 19:25:04,763 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 19:25:04,764 - __main__ - INFO - Loading tokenizer
+2024-12-21 19:25:05,319 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 19:25:05,319 - __main__ - INFO - Loading dataset
+2024-12-21 19:25:09,421 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 19:25:09,421 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 19:25:09,588 - __main__ - INFO - Study has 13 completed and 0 failed trials
+2024-12-21 19:25:09,611 - __main__ - INFO - Resuming from trial 14
+2024-12-21 19:25:09,621 - __main__ - INFO - Best accuracy so far: 0.3878
+2024-12-21 19:25:09,764 - __main__ - INFO - 
+Starting trial 16
+2024-12-21 19:25:09,764 - __main__ - INFO - Trial 16 parameters:
+2024-12-21 19:25:09,764 - __main__ - INFO - Temperature: 0.4
+2024-12-21 19:25:09,764 - __main__ - INFO - Top_p: 0.5
+2024-12-21 19:33:05,203 - root - ERROR - Error processing batch starting at index 144: 1 validation error for Answer
+__root__
+  Unterminated string starting at: line 1 column 16 (char 15) [type=value_error.jsondecode, input_value='{ "reasoning" :" 1 2 2 2... 2 2 2 2 2 2 2 2 2 2 2 ', input_type=str]
+2024-12-21 19:45:02,249 - root - INFO - Evaluation completed. Processed 394/410 examples
+2024-12-21 19:45:02,249 - root - INFO - Skipped 16 examples at indices: [144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159]
+2024-12-21 19:45:02,269 - __main__ - INFO - Trial 16 completed with accuracy: 0.3706
+2024-12-21 19:45:05,856 - __main__ - INFO - 
+Starting trial 17
+2024-12-21 19:45:05,856 - __main__ - INFO - Trial 17 parameters:
+2024-12-21 19:45:05,856 - __main__ - INFO - Temperature: 0.8
+2024-12-21 19:45:05,856 - __main__ - INFO - Top_p: 0.9
+2024-12-21 20:28:37,953 - __main__ - INFO - Loaded existing study: mmlu_opt_constrained_20241221_093807
+2024-12-21 20:28:37,968 - __main__ - INFO - Number of trials: 18
+2024-12-21 20:28:38,031 - __main__ - INFO - Using existing study with 18 trials
+2024-12-21 20:28:38,208 - __main__ - INFO - Resuming existing study: mmlu_opt_constrained_20241221_093807
+2024-12-21 20:28:38,208 - __main__ - INFO - Setting up random seeds
+2024-12-21 20:28:38,265 - __main__ - INFO - CUDA is available. GPU information:
+2024-12-21 20:28:38,315 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 3090
+2024-12-21 20:28:38,315 - __main__ - INFO - Free memory on GPU 0: 24575.50 MB
+2024-12-21 20:28:38,316 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 3090
+2024-12-21 20:28:38,316 - __main__ - INFO - Free memory on GPU 1: 24575.50 MB
+2024-12-21 20:28:38,316 - __main__ - INFO - Initializing accelerator
+2024-12-21 20:28:38,362 - __main__ - INFO - Accelerator initialized successfully
+2024-12-21 20:28:38,362 - __main__ - INFO - Loading tokenizer
+2024-12-21 20:28:38,783 - __main__ - INFO - Tokenizer loaded successfully
+2024-12-21 20:28:38,783 - __main__ - INFO - Loading dataset
+2024-12-21 20:28:43,254 - __main__ - INFO - Dataset loaded successfully with 410 examples
+2024-12-21 20:28:43,254 - __main__ - INFO - Environment setup completed successfully
+2024-12-21 20:28:43,431 - __main__ - INFO - Study has 14 completed and 0 failed trials
+2024-12-21 20:28:43,454 - __main__ - INFO - Resuming from trial 17
+2024-12-21 20:28:43,465 - __main__ - INFO - Best accuracy so far: 0.3878
+2024-12-21 20:28:43,622 - __main__ - INFO - 
+Starting trial 18
+2024-12-21 20:28:43,622 - __main__ - INFO - Trial 18 parameters:
+2024-12-21 20:28:43,622 - __main__ - INFO - Temperature: 0.1
+2024-12-21 20:28:43,623 - __main__ - INFO - Top_p: 0.4
+2024-12-21 20:46:42,902 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 20:46:42,923 - __main__ - INFO - Trial 18 completed with accuracy: 0.3732
+2024-12-21 20:46:46,420 - __main__ - INFO - 
+Starting trial 19
+2024-12-21 20:46:46,420 - __main__ - INFO - Trial 19 parameters:
+2024-12-21 20:46:46,420 - __main__ - INFO - Temperature: 0.5
+2024-12-21 20:46:46,420 - __main__ - INFO - Top_p: 0.3
+2024-12-21 21:05:45,644 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 21:05:45,661 - __main__ - INFO - Trial 19 completed with accuracy: 0.3732
+2024-12-21 21:05:48,992 - __main__ - INFO - 
+Starting trial 20
+2024-12-21 21:05:48,992 - __main__ - INFO - Trial 20 parameters:
+2024-12-21 21:05:48,992 - __main__ - INFO - Temperature: 0.2
+2024-12-21 21:05:48,992 - __main__ - INFO - Top_p: 0.6
+2024-12-21 21:25:48,281 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 21:25:48,301 - __main__ - INFO - Trial 20 completed with accuracy: 0.3610
+2024-12-21 21:25:51,955 - __main__ - INFO - 
+Starting trial 21
+2024-12-21 21:25:51,955 - __main__ - INFO - Trial 21 parameters:
+2024-12-21 21:25:51,955 - __main__ - INFO - Temperature: 0.5
+2024-12-21 21:25:51,955 - __main__ - INFO - Top_p: 0.7
+2024-12-21 21:44:54,039 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 21:44:54,059 - __main__ - INFO - Trial 21 completed with accuracy: 0.3659
+2024-12-21 21:44:57,549 - __main__ - INFO - 
+Starting trial 22
+2024-12-21 21:44:57,549 - __main__ - INFO - Trial 22 parameters:
+2024-12-21 21:44:57,549 - __main__ - INFO - Temperature: 0.0
+2024-12-21 21:44:57,549 - __main__ - INFO - Top_p: 0.5
+2024-12-21 22:02:44,376 - root - INFO - Evaluation completed. Processed 410/410 examples
+2024-12-21 22:02:44,397 - __main__ - INFO - Trial 22 completed with accuracy: 0.3878
+2024-12-21 22:02:47,897 - __main__ - INFO - 
+Starting trial 23
+2024-12-21 22:02:47,897 - __main__ - INFO - Trial 23 parameters:
+2024-12-21 22:02:47,897 - __main__ - INFO - Temperature: 0.9
+2024-12-21 22:02:47,897 - __main__ - INFO - Top_p: 0.6

@@ -14,7 +14,14 @@ import logging
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, Union
+from typing import Optional, Union, Set, Tuple
+import argparse
+from urllib.parse import quote
+import time
+import gc
+import signal
+import psutil
+import os
 
 # Setup logging
 logging.basicConfig(
@@ -27,15 +34,83 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+def get_last_completed_trial(study: optuna.Study) -> Optional[optuna.Trial]:
+    """Get last completed trial"""
+    completed_trials = [t for t in study.trials if t.state == optuna.trial.TrialState.COMPLETE]
+    return max(completed_trials, key=lambda t: t.number) if completed_trials else None
+
+def cleanup_memory():
+    """Clean up GPU and CPU memory"""
+    gc.collect()
+    torch.cuda.empty_cache()
+    
+def check_temperature() -> bool:
+    """Check GPU and CPU temperatures"""
+    try:
+        # Check GPU temperature using nvidia-smi
+        gpu_temp = float(os.popen('nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits').read())
+        if gpu_temp > 84:  # Threshold in Celsius
+            return False
+            
+        # Check CPU temperature if available
+        temps = psutil.sensors_temperatures()
+        if 'coretemp' in temps:
+            cpu_temp = max(temp.current for temp in temps['coretemp'])
+            if cpu_temp > 85:  # Threshold in Celsius
+                return False
+                
+        return True
+    except:
+        return True  # Continue if temperature check fails
+
+def continue_optimization(study: optuna.Study, n_trials: int) -> optuna.Study:
+    """Continue optimization with temperature checks and delays"""
+    last_trial = get_last_completed_trial(study)
+    if not last_trial:
+        return study
+        
+    for trial in study.trials:
+        if trial.state == optuna.trial.TrialState.RUNNING:
+            trial._state = optuna.trial.TrialState.FAIL
+    
+    return study
+
+def get_tried_params(study: optuna.Study) -> Set[Tuple[float, float]]:
+    """Get set of previously tried (temperature, top_p) combinations"""
+    return {
+        (t.params['temperature'], t.params['top_p']) 
+        for t in study.trials 
+        if t.state == optuna.trial.TrialState.COMPLETE
+    }
+
 class MMPROOptimizer:
     def __init__(
         self,
         base_config: Union[UnconstrainedConfig, ConstrainedConfig],
         eval_type: str = "unconstrained",
         n_trials: int = 20,
-        study_name: Optional[str] = None
+        storage_url: Optional[str] = None,
+        study_name: Optional[str] = None,
+        study: Optional[optuna.Study] = None
     ):
+        self.base_config = base_config
         self.eval_type = eval_type
+        self.n_trials = n_trials
+        self.storage_url = storage_url
+        self.study_name = study_name or f"mmlu_opt_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        self.logger = logging.getLogger(__name__)
+
+        if study:
+            self.study = study
+            self.logger.info(f"Using existing study with {len(study.trials)} trials")
+        else:
+            self.study = optuna.create_study(
+                study_name=self.study_name,
+                storage=self.storage_url,
+                direction="maximize",
+                load_if_exists=False  # Don't load if exists, we want new study
+            )
+
         if eval_type not in ["constrained", "unconstrained"]:
             raise ValueError("eval_type must be either 'constrained' or 'unconstrained'")
 
@@ -82,14 +157,37 @@ class MMPROOptimizer:
             
             self.setup_environment()
             
+            # Configure TPESampler with specific settings
+            sampler = optuna.samplers.TPESampler(
+                seed=42,  # Fixed seed for reproducibility
+                n_startup_trials=5,  # Initial random trials for exploration
+                multivariate=True,  # Consider parameter relationships
+                constant_liar=True  # Handle parallel optimization better
+            )
+            
             self.study = optuna.create_study(
                 study_name=self.study_name,
                 storage=self.storage_url,
                 direction="maximize",
-                sampler=optuna.samplers.TPESampler(seed=42),
+                sampler=sampler,
                 load_if_exists=True
             )
             
+            # Seed study with known good parameter combinations if new study
+            if not study_exists:
+                initial_trials = [
+                    {'temperature': 0.5, 'top_p': 0.5},  # Balanced
+                    {'temperature': 0.3, 'top_p': 0.7},  # Conservative temp, high diversity
+                    {'temperature': 0.7, 'top_p': 0.3}   # High temp, low diversity
+                ]
+                for trial_params in initial_trials:
+                    # Use suggest_float without step parameter
+                    def enqueue_trial(trial):
+                        trial.suggest_float('temperature', 0.01, 0.95)
+                        trial.suggest_float('top_p', 0.01, 0.95)
+                        return 0.0
+                    self.study.enqueue_trial(trial_params)
+
             # Store evaluation type in study user attributes
             if not self.study.user_attrs:
                 self.study.set_user_attr('eval_type', eval_type)
@@ -106,7 +204,7 @@ class MMPROOptimizer:
             raise
 
     def setup_environment(self):
-        """Initialize all necessary components with detailed logging."""
+        """Setup evaluation environment"""
         try:
             logger.info("Setting up random seeds")
             seed = 42
@@ -130,7 +228,7 @@ class MMPROOptimizer:
 
             logger.info("Loading tokenizer")
             self.tokenizer = AutoTokenizer.from_pretrained(self.base_config.model_name)
-            self.tokenizer.padding_side = "left"
+            self.tokenizer.padding_side = 'left'
             logger.info("Tokenizer loaded successfully")
             
             if self.eval_type == "unconstrained":
@@ -169,63 +267,73 @@ class MMPROOptimizer:
             logger.error(f"Error in setup_environment: {str(e)}", exc_info=True)
             raise
 
-    def objective(self, trial: optuna.Trial) -> float:
-        """Optuna objective function for optimization."""
-        self.logger.info(f"\nStarting trial {trial.number}")
-        
+    def _create_evaluator(self, config: Union[UnconstrainedConfig, ConstrainedConfig]):
+        """Create appropriate evaluator based on eval_type"""
         try:
-            # Create config for this trial
+            if self.eval_type == 'constrained':
+                if not hasattr(self, 'tokenizer'):
+                    raise ValueError("Tokenizer not initialized")
+                return MMLPROEvaluatorConstr(
+                    tokenizer=self.tokenizer,
+                    config=config,
+                    model_name=self.base_config.model_name
+                )
+            elif self.eval_type == 'unconstrained':
+                return MMPROEvaluator(config)
+            else:
+                raise ValueError(f"Unknown eval_type: {self.eval_type}")
+        except Exception as e:
+            self.logger.error(f"Error creating evaluator: {str(e)}")
+            raise
+
+    def objective(self, trial: optuna.Trial) -> float:
+        """Run single optimization trial with continuous parameter sampling"""
+        try:
+            max_attempts = 50
+            for attempt in range(max_attempts):
+                # Remove step parameter for continuous sampling
+                temp = trial.suggest_float('temperature', 0.01, 0.95)
+                top_p = trial.suggest_float('top_p', 0.01, 0.95)
+                
+                # Round for display/comparison only
+                temp_rounded = round(temp, 1)
+                top_p_rounded = round(top_p, 1)
+                
+                tried_params = get_tried_params(self.study)
+                if (temp_rounded, top_p_rounded) not in tried_params:
+                    break
+                    
+                trial._params.clear()
+                
+                if attempt == max_attempts - 1:
+                    raise RuntimeError("Could not find unused parameter combination")
+
             trial_config = deepcopy(self.base_config)
-            
-            # Sample parameters
-            trial_config.temperature = trial.suggest_float('temperature', 0.1, 0.9, step=0.1)
-            trial_config.top_p = trial.suggest_float('top_p', 0.1, 0.9, step=0.1)
-            
+            trial_config.temperature = temp  # Use unrounded values
+            trial_config.top_p = top_p
+
+            self.logger.info(f"\nStarting trial {trial.number}")
             self.logger.info(f"Trial {trial.number} parameters:")
             self.logger.info(f"Temperature: {trial_config.temperature:.1f}")
             self.logger.info(f"Top_p: {trial_config.top_p:.1f}")
 
-            # Store additional trial information
+            # Store trial information
             trial.set_user_attr('model_name', self.base_config.model_name)
             trial.set_user_attr('subject', self.base_config.subject)
             trial.set_user_attr('timestamp', datetime.now().isoformat())
-            trial.set_user_attr('max_new_tokens', self.base_config.max_new_tokens)
             trial.set_user_attr('eval_type', self.eval_type)
 
-            # Initialize appropriate evaluator
-            if self.eval_type == "constrained":
-                evaluator = MMLPROEvaluatorConstr(
-                    self.base_config.model_name,
-                    self.tokenizer,
-                    trial_config,
-                    self.accelerator
-                )
-            else:
-                evaluator = MMPROEvaluator(
-                    self.model,
-                    self.tokenizer,
-                    trial_config,
-                    self.accelerator
-                )
-
+            # Run evaluation
+            evaluator = self._create_evaluator(trial_config)
             try:
-                self.logger.info("Running evaluation")
                 results = evaluator.evaluate(self.subject_data)
                 accuracy = results['accuracy']
-                
-                # Store accuracy and other metrics in trial
-                trial.set_user_attr('accuracy', float(accuracy))  # Ensure accuracy is stored as float
-                trial.set_user_attr('n_examples', len(self.subject_data))
-
-                
+                trial.set_user_attr('accuracy', float(accuracy))
                 self.logger.info(f"Trial {trial.number} completed with accuracy: {accuracy:.4f}")
-                
-                # Make sure to return the accuracy as the objective value
                 return float(accuracy)
-                
             finally:
                 evaluator.close()
-                
+
         except Exception as e:
             self.logger.error(f"Error in trial {trial.number}: {str(e)}", exc_info=True)
             raise
@@ -233,31 +341,43 @@ class MMPROOptimizer:
     def optimize(self) -> dict:
         """Run optimization process and return best parameters."""
         try:
-            self.logger.info(f"\nStarting optimization for subject: {self.base_config.subject}")
-            self.logger.info(f"Evaluation type: {self.eval_type}")
+            # Continue from last completed trial
+            self.study = continue_optimization(self.study, self.n_trials)
+            last_trial = get_last_completed_trial(self.study)
             
-            trials = self.study.trials
-            completed_trials = [t for t in trials if t.state == optuna.trial.TrialState.COMPLETE]
-            remaining_trials = self.n_trials - len(completed_trials)
+            if last_trial:
+                self.logger.info(f"Resuming from trial {last_trial.number + 1}")
+                self.logger.info(f"Best accuracy so far: {self.study.best_value:.4f}")
             
-            if remaining_trials > 0:
-                self.study.optimize(self.objective, n_trials=remaining_trials)
+            # Optimize remaining trials
+            remaining_trials = self.n_trials - len([t for t in self.study.trials if t.state == optuna.trial.TrialState.COMPLETE])
             
-            results = {
+            for _ in range(remaining_trials):
+                # Check temperature before each trial
+                if not check_temperature():
+                    self.logger.warning("System temperature too high, pausing for 60s")
+                    time.sleep(10)
+                    continue
+                    
+                self.study.optimize(
+                    self.objective,
+                    n_trials=1,  # Run one trial at a time
+                    timeout=None
+                )
+                
+                # Cleanup and cooling period
+                cleanup_memory()
+                time.sleep(3)  # Cool-down period between trials
+            
+            return {
                 'best_parameters': self.study.best_params,
                 'best_accuracy': self.study.best_value,
-                'completed_trials': len(self.study.trials),
+                'completed_trials': len([t for t in self.study.trials if t.state == optuna.trial.TrialState.COMPLETE]),
                 'model_name': self.base_config.model_name,
                 'subject': self.base_config.subject,
                 'study_name': self.study_name,
                 'eval_type': self.eval_type
             }
-            
-            self.logger.info("Optimization completed successfully")
-            self.logger.info(f"Best parameters: {results['best_parameters']}")
-            self.logger.info(f"Best accuracy: {results['best_accuracy']:.4f}")
-            
-            return results
             
         except Exception as e:
             self.logger.error("Error during optimization", exc_info=True)
@@ -292,13 +412,68 @@ class MMPROOptimizer:
         except Exception as e:
             logger.error("Error calculating study statistics", exc_info=True)
             raise
-        
-def main():
-    import argparse
+
+def verify_study_exists(storage_url: str, study_name: str, eval_type: str) -> bool:
+    """Verify if study exists and matches eval_type"""
+    studies = optuna.study.get_all_study_summaries(storage=storage_url)
+    study_match = next((s for s in studies if s.study_name == study_name), None)
     
-    parser = argparse.ArgumentParser(description='Run or continue MMLU optimization')
-    parser.add_argument('--continue-study', type=str, help='Name of study to continue')
-    parser.add_argument('--list-studies', action='store_true', help='List all existing studies')
+    if not study_match:
+        return False
+        
+    # For existing studies without eval_type, allow continuation
+    study_eval_type = study_match.user_attrs.get('eval_type')
+    return study_eval_type is None or study_eval_type == eval_type
+
+def display_study_details(storage_url: str, pattern: str = None, verbose: bool = False):
+    """Display study information with optional pattern matching and verbosity"""
+    studies = optuna.study.get_all_study_summaries(storage=storage_url)
+    
+    # Filter studies if pattern provided
+    if pattern:
+        studies = [s for s in studies if pattern.lower() in s.study_name.lower()]
+    
+    if not studies:
+        print(f"No studies found{' matching pattern: ' + pattern if pattern else ''}")
+        return
+
+    if not verbose:
+        print("\nExisting studies:")
+        for study in studies:
+            print(f"- {study.study_name}: {study.n_trials} trials completed")
+        print("\nUse --verbose flag for detailed trial information")
+        return
+
+    for study in studies:
+        print(f"\nStudy: {study.study_name}")
+        print("=" * (len(study.study_name) + 7))
+        print(f"Subject: {study.user_attrs.get('subject', 'Not set')}")
+        print(f"Eval Type: {study.user_attrs.get('eval_type', 'Not set')}")
+        
+        full_study = optuna.load_study(study_name=study.study_name, storage=storage_url)
+        
+        print("\nTrial Results:")
+        print("-" * 80)
+        print(f"{'Trial':^6} | {'Temperature':^11} | {'Top_p':^7} | {'Accuracy':^10} | {'State':^12}")
+        print("-" * 80)
+        
+        for trial in full_study.trials:
+            if trial.state == optuna.trial.TrialState.COMPLETE:
+                acc = trial.user_attrs.get('accuracy', 'N/A')
+                acc_str = f"{acc:.4f}" if isinstance(acc, float) else acc
+                print(f"{trial.number:^6} | {trial.params.get('temperature', 'N/A'):^11.1f} | "
+                      f"{trial.params.get('top_p', 'N/A'):^7.1f} | {acc_str:^10} | {trial.state.name:^12}")
+            else:
+                print(f"{trial.number:^6} | {'N/A':^11} | {'N/A':^7} | {'N/A':^10} | {trial.state.name:^12}")
+        print("-" * 80)
+        print(f"Best accuracy: {study.best_trial.value:.4f}" if study.best_trial else "No completed trials")
+        print()
+
+def main():
+    parser = argparse.ArgumentParser(description='MMLU optimization utilities')
+    parser.add_argument('--continue-study', type=str, help='Name of study to continue') 
+    parser.add_argument('--list-studies', type=str, nargs='?', const='', help='List studies, optionally filter by pattern')
+    parser.add_argument('--verbose', action='store_true', help='Show detailed trial information')
     parser.add_argument(
         '--eval-type',
         type=str,
@@ -306,44 +481,85 @@ def main():
         default='unconstrained',
         help='Type of evaluation to run'
     )
+    parser.add_argument(
+        '--db-path',
+        type=str,
+        default=None,
+        help='Path to store/load optimization database'
+    )
+    parser.add_argument(
+        '--search-study',
+        type=str,
+        help='Search for studies matching pattern'
+    )
     args = parser.parse_args()
 
-    # Set paths based on eval_type
-    eval_dir = Path("mmlu_pro_constrained" if args.eval_type == "constrained" else "mmlu_pro")
-    db_name = "mmlu_optimization.db"
-    storage_url = f"sqlite:///{str(eval_dir / db_name)}"
+    # Set paths based on eval_type and db_path
+    if args.db_path:
+        db_path = Path(args.db_path)
+    else:
+        eval_dir = Path("mmlu_pro_constrained" if args.eval_type == "constrained" else "mmlu_pro")
+        db_path = eval_dir / "mmlu_optimization.db"
+    
+    # Create parent directories if they don't exist
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    storage_url = f"sqlite:///{str(db_path)}"
 
-    if args.list_studies:
-        studies = optuna.study.get_all_study_summaries(storage_url)
-        print("\nExisting studies:")
-        for study in studies:
-            n_trials = study.n_trials
-            eval_type = study.user_attrs.get('eval_type', 'unknown')
-            print(f"- {study.study_name}: {n_trials} trials, type: {eval_type}, best value: {study.best_trial.value if study.best_trial else 'N/A'}")
+    if args.list_studies is not None:
+        display_study_details(storage_url, args.list_studies, args.verbose)
+        return
+
+    if args.search_study:
+        display_study_details(storage_url, args.search_study)
         return
 
     try:
-        # Use appropriate config based on eval_type
-        base_config = CONSTRAINED_DEFAULT if args.eval_type == "constrained" else UNCONSTRAINED_DEFAULT
-        
-        optimizer = MMPROOptimizer(
-            base_config=base_config,
-            eval_type=args.eval_type,
-            n_trials=20,
-            study_name=args.continue_study
-        )
-        
-        # Run optimization
+        if args.continue_study:
+            # First verify study exists
+            studies = optuna.study.get_all_study_summaries(storage=storage_url)
+            study_match = next((s for s in studies if s.study_name == args.continue_study), None)
+            
+            if not study_match:
+                logger.error(f"Study '{args.continue_study}' not found. Available studies:")
+                for s in studies:
+                    logger.info(f"- {s.study_name}")
+                raise ValueError("Study not found")
+            
+            # Load existing study
+            study = optuna.load_study(
+                study_name=args.continue_study,
+                storage=storage_url
+            )
+            logger.info(f"Loaded existing study: {args.continue_study}")
+            logger.info(f"Number of trials: {len(study.trials)}")
+            
+            # Create optimizer with existing study
+            optimizer = MMPROOptimizer(
+                base_config=CONSTRAINED_DEFAULT if args.eval_type == "constrained" else UNCONSTRAINED_DEFAULT,
+                eval_type=args.eval_type,
+                n_trials=20,
+                study=study,
+                study_name=args.continue_study,  # Pass existing study name
+                storage_url=storage_url
+            )
+        else:
+            # Create new study with timestamp
+            study_name = f"mmlu_opt_{args.eval_type}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            optimizer = MMPROOptimizer(
+                base_config=CONSTRAINED_DEFAULT if args.eval_type == "constrained" else UNCONSTRAINED_DEFAULT,
+                eval_type=args.eval_type,
+                n_trials=20,
+                study_name=study_name,
+                storage_url=storage_url
+            )
+
         results = optimizer.optimize()
         
-        # Print final results
-        print("\nOptimization completed!")
-        print(f"Best parameters found:")
+        print(f"\nBest parameters found:")
         print(f"Temperature: {results['best_parameters']['temperature']:.1f}")
         print(f"Top_p: {results['best_parameters']['top_p']:.1f}")
         print(f"Best accuracy: {results['best_accuracy']:.4f}")
         
-        # Print study statistics
         stats = optimizer.get_study_statistics()
         print("\nStudy Statistics:")
         print(f"Total trials completed: {results['completed_trials']}")
@@ -353,7 +569,7 @@ def main():
         for param, importance in stats['parameter_importance'].items():
             print(f"{param}: {importance:.3f}")
         print(f"\nResults stored in: {optimizer.storage_url}")
-        
+
     except Exception as e:
         logger.error("Fatal error in main", exc_info=True)
         raise
